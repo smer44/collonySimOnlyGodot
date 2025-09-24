@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="TerrainBresenhamCircle" load_steps=2 format=3 uid="uid://c8s8ilyh1jtw2"]
+
+[ext_resource type="Script" uid="uid://dq6br32s0rlrd" path="res://grid_marking_gen/terrain_brezenham_circle.gd" id="1_2hfa8"]
+
+[resource]
+script = ExtResource("1_2hfa8")
+metadata/_custom_type_script = "uid://dq6br32s0rlrd"

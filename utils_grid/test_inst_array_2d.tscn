@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dr5qllrtc4q4g"]
+
+[ext_resource type="Script" uid="uid://xh6b8yfnx70k" path="res://utils_grid/array_2d.gd" id="1_qnbp3"]
+
+[node name="Data" type="Node"]
+script = ExtResource("1_qnbp3")
+grid = Array[Array]([[0, 1, 0], [1, 1, 1], [2, 1, 0], [1, 2, 1]])

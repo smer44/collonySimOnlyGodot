@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwbb0hdtmg3rf"]
+
+[ext_resource type="Script" uid="uid://rce86futmydr" path="res://utils_grid/grid_debug_multi_mesh.gd" id="1_l28uq"]
+[ext_resource type="Resource" uid="uid://dehat8sb1a1ek" path="res://tests/res/big_grid2d_test_array.tres" id="2_21edc"]
+[ext_resource type="Script" uid="uid://jcvuniltb8vq" path="res://utils/wasd_move_mouse_rotate.gd" id="3_21edc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_21edc"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="GridDebugMultiMesh" type="MultiMeshInstance3D" parent="."]
+script = ExtResource("1_l28uq")
+grid2d = ExtResource("2_21edc")
+boundary_start = Vector2i(0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2899, 2.73847)
+script = ExtResource("3_21edc")
+hide_cursor = true
+
+[node name="DebugCube" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.43024, 0)
+mesh = SubResource("BoxMesh_21edc")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.777475, 0.628913, 0, -0.628913, 0.777475, 0, 0, 0)

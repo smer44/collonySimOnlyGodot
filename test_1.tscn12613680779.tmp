@@ -1,0 +1,58 @@
+[gd_scene load_steps=13 format=3 uid="uid://c6x4wst1opirk"]
+
+[ext_resource type="Script" uid="uid://dwdfgk5hnneq5" path="res://tile_editor/tile_editor_node_3d.gd" id="1_f4dsk"]
+[ext_resource type="Script" uid="uid://jcvuniltb8vq" path="res://wasd_move_mouse_rotate.gd" id="2_f0tba"]
+[ext_resource type="PackedScene" uid="uid://bpjrs7ak7evte" path="res://items/wall_border_item.tscn" id="2_jx2ws"]
+[ext_resource type="PackedScene" uid="uid://dcn6v1ke5ujsd" path="res://wireframe_cube.tscn" id="3_6yos3"]
+[ext_resource type="Texture2D" uid="uid://c4bbrgnhsx7pd" path="res://textures/grass.png" id="5_hnega"]
+[ext_resource type="Script" uid="uid://ca3a40bcfl52x" path="res://tile_editor/scene_item_selector.gd" id="6_jx2ws"]
+[ext_resource type="Script" uid="uid://e8k3scq4xqur" path="res://tile_editor/scene_selection_item.gd" id="7_ar7m3"]
+[ext_resource type="Resource" uid="uid://dnk35cyogx6c2" path="res://items/res/wall_border_item.tres" id="8_0mw3u"]
+[ext_resource type="Resource" uid="uid://lope8y2icwcr" path="res://items/res/wall_mid_item.tres" id="9_ar7m3"]
+[ext_resource type="Texture2D" uid="uid://cyj7y0dvmy4gv" path="res://items/wall_mid_image.png" id="10_0mw3u"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_htsna"]
+albedo_texture = ExtResource("5_hnega")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_f0tba"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="TileEditorNode3D" type="Node3D" parent="."]
+script = ExtResource("1_f4dsk")
+prefab = ExtResource("2_jx2ws")
+wireframe_prefab = ExtResource("3_6yos3")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.319561, 1.12783, 2.07617)
+script = ExtResource("2_f0tba")
+
+[node name="PlaneMeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.925, 0, 0, 0, 4.925, 0, 0, 0, 4.925, -0.000546217, -0.00513506, 0.00395989)
+material_override = SubResource("StandardMaterial3D_htsna")
+mesh = SubResource("PlaneMesh_f0tba")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.527401, 0.849617, 0, -0.849617, 0.527401, 0, 0, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -232.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("6_jx2ws")
+items = Array[ExtResource("7_ar7m3")]([ExtResource("8_0mw3u"), ExtResource("9_ar7m3")])
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Control"]
+position = Vector2(62.875, 169.375)
+scale = Vector2(0.246644, 0.232571)
+texture = ExtResource("10_0mw3u")

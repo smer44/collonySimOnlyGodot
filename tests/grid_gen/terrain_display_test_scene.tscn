@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://blbr60nri1u0y"]
+
+[ext_resource type="Script" uid="uid://x4d6arcpv411" path="res://grid_chunks/array_mesh_grid_display.gd" id="1_6nmpq"]
+[ext_resource type="Resource" uid="uid://rmh34i8jyg3b" path="res://tests/grid_gen/terrain_astar_test_function.tres" id="2_26nnq"]
+[ext_resource type="PackedScene" uid="uid://chxovomx6cl0q" path="res://usual_camera_setup.tscn" id="3_26nnq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_26nnq"]
+vertex_color_use_as_albedo = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="ArrayMeshGridDisplay" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_26nnq")
+script = ExtResource("1_6nmpq")
+surface_function = ExtResource("2_26nnq")
+metadata/_custom_type_script = "uid://x4d6arcpv411"
+
+[node name="UsualCameraSetup" parent="." instance=ExtResource("3_26nnq")]

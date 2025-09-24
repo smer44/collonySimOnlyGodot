@@ -1,0 +1,46 @@
+[gd_scene load_steps=9 format=3 uid="uid://dui48rcnnl5jk"]
+
+[ext_resource type="Script" uid="uid://x4d6arcpv411" path="res://grid_chunks/array_mesh_chunk.gd" id="1_4itph"]
+[ext_resource type="Script" uid="uid://jcvuniltb8vq" path="res://utils/wasd_move_mouse_rotate.gd" id="2_pxsfw"]
+[ext_resource type="Resource" uid="uid://ux23s5ql5dok" path="res://grid/terrain_smart_function_example.tres" id="2_wqo8f"]
+[ext_resource type="Script" uid="uid://dve4qqxyqkkqd" path="res://grid_chunks/multi_mesh_chunk.gd" id="4_tbcar"]
+[ext_resource type="PackedScene" uid="uid://c2sgwc81otfnw" path="res://simple_tiles/cube.tscn" id="5_o0rkk"]
+[ext_resource type="Resource" uid="uid://c8s8ilyh1jtw2" path="res://grid/terrain_bresenham_circle_example.tres" id="6_pm7uh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wqo8f"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_wqo8f"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="ArrayMeshChunkMeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+material_override = SubResource("StandardMaterial3D_wqo8f")
+script = ExtResource("1_4itph")
+surface_data = ExtResource("2_wqo8f")
+width = 500
+depth = 500
+
+[node name="Camera3D" type="Camera3D" parent="."]
+script = ExtResource("2_pxsfw")
+hide_cursor = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_wqo8f")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.598395, 0.801202, 0, -0.801202, 0.598395, 0, 0, 0)
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
+visible = false
+script = ExtResource("4_tbcar")
+surface_data = ExtResource("2_wqo8f")
+width = 500
+depth = 500
+prefab = ExtResource("5_o0rkk")
+
+[node name="ArrayMeshChunk" type="MeshInstance3D" parent="."]
+script = ExtResource("1_4itph")
+surface_data = ExtResource("6_pm7uh")
+metadata/_custom_type_script = "uid://x4d6arcpv411"

@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://scbcronil878"]
+
+[ext_resource type="Script" uid="uid://cc5nv7vxwob62" path="res://grid_gen/grid_terrain_3d.gd" id="1_8560g"]
+[ext_resource type="Script" uid="uid://jcvuniltb8vq" path="res://utils/wasd_move_mouse_rotate.gd" id="2_osow7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3ycqm"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="GridOfBoxesNode3D" type="Node3D" parent="."]
+script = ExtResource("1_8560g")
+width = 500
+depth = 1000
+box_size = Vector3(0.7, 0.7, 0.7)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3668, 1.80283)
+script = ExtResource("2_osow7")
+hide_cursor = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.7881)
+mesh = SubResource("BoxMesh_3ycqm")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.505928, 0.862576, 0, -0.862576, -0.505928, 0, 1.6839, 0)

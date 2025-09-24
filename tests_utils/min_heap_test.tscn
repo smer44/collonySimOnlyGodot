@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcss4rf4n84y8"]
+
+[ext_resource type="Script" uid="uid://bccuf81h6qq0f" path="res://tests_utils/heap_test_node.gd" id="1_6lf6n"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="HeapTest" type="Node" parent="."]
+script = ExtResource("1_6lf6n")

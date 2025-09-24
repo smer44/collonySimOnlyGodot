@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8d307fditv3x"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_f0tba"]
+
+[node name="Wall" type="Node3D"]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.15, 0, 0, 0)
+mesh = SubResource("BoxMesh_f0tba")
+skeleton = NodePath("../..")

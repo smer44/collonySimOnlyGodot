@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://chxovomx6cl0q"]
+
+[ext_resource type="Script" uid="uid://jcvuniltb8vq" path="res://utils/wasd_move_mouse_rotate.gd" id="1_0ycvh"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_5qlsg"]
+
+[node name="UsualCameraSetup" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2469683, 3.3505445)
+script = ExtResource("1_0ycvh")
+hide_cursor = true
+
+[node name="DebugCube" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_5qlsg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.7726893, 0.63478446, 0, -0.63478446, 0.7726893, 0, 0, 0)

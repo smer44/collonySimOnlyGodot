@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2sgwc81otfnw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7gdew"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_tbcar"]
+
+[node name="Cube" type="MeshInstance3D"]
+material_override = SubResource("StandardMaterial3D_7gdew")
+mesh = SubResource("BoxMesh_tbcar")

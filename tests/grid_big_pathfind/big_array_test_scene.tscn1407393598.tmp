@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxdpp3tujmofe"]
+
+[ext_resource type="Script" uid="uid://x4d6arcpv411" path="res://grid_chunks/array_mesh_grid_display.gd" id="1_a4otr"]
+[ext_resource type="Resource" uid="uid://b5cvjq4y8cd4m" path="res://tests/grid_hpa/hpa_debug_show_for_test.tres" id="2_8bsk2"]
+[ext_resource type="PackedScene" uid="uid://chxovomx6cl0q" path="res://usual_camera_setup.tscn" id="2_602tb"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="ArrayMeshGridDisplay" type="MeshInstance3D" parent="."]
+script = ExtResource("1_a4otr")
+surface_function = ExtResource("2_8bsk2")
+width = 200
+depth = 200
+epsilon = 0.01
+metadata/_custom_type_script = "uid://x4d6arcpv411"
+
+[node name="UsualCameraSetup" parent="." instance=ExtResource("2_602tb")]

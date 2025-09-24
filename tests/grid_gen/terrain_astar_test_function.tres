@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TerrainPathfindfunction" load_steps=3 format=3 uid="uid://rmh34i8jyg3b"]
+
+[ext_resource type="Script" uid="uid://b10mvni88jgvk" path="res://grid_marking_gen/terrain_pathfind_function.gd" id="1_q7odg"]
+[ext_resource type="Resource" uid="uid://c7budsaf1g68k" path="res://tests/grid_gen/terrain_display_test_function.tres" id="2_6afr7"]
+
+[resource]
+script = ExtResource("1_q7odg")
+terrain = ExtResource("2_6afr7")
+start = Vector2i(31, 7)
+goal = Vector2i(31, 29)
+metadata/_custom_type_script = "uid://b10mvni88jgvk"

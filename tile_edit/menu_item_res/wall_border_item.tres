@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SceneSelectionItem" load_steps=4 format=3 uid="uid://dnk35cyogx6c2"]
+
+[ext_resource type="Texture2D" uid="uid://dj1cphxls1nee" path="res://tile_edit/icons/wall_border.png" id="1_0400u"]
+[ext_resource type="PackedScene" uid="uid://bpjrs7ak7evte" path="res://static_items/wall_border_item.tscn" id="2_jugdl"]
+[ext_resource type="Script" uid="uid://e8k3scq4xqur" path="res://tile_edit/editor_scripts/scene_selection_item.gd" id="3_0oehn"]
+
+[resource]
+script = ExtResource("3_0oehn")
+scene = ExtResource("2_jugdl")
+icon = ExtResource("1_0400u")

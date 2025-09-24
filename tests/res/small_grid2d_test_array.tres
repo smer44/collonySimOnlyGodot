@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Array2D" load_steps=2 format=3 uid="uid://b2f6prahoradh"]
+
+[ext_resource type="Script" uid="uid://xh6b8yfnx70k" path="res://utils_grid/array_2d.gd" id="1_vocnr"]
+
+[resource]
+script = ExtResource("1_vocnr")
+grid = Array[Array]([[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]])
+metadata/_custom_type_script = "uid://xh6b8yfnx70k"

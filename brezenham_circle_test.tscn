@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://bn0757kao5i17"]
+
+[ext_resource type="Script" uid="uid://x4d6arcpv411" path="res://grid_chunks/array_mesh_grid_display.gd" id="1_gxat7"]
+[ext_resource type="Script" uid="uid://jcvuniltb8vq" path="res://utils/wasd_move_mouse_rotate.gd" id="3_4xmbh"]
+[ext_resource type="Resource" uid="uid://c8s8ilyh1jtw2" path="res://grid_gen/terrain_bresenham_circle_example.tres" id="6_l3cqk"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wqo8f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x6d4u"]
+vertex_color_use_as_albedo = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+script = ExtResource("3_4xmbh")
+hide_cursor = true
+
+[node name="DebugCube" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_wqo8f")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.598395, 0.801202, 0, -0.801202, 0.598395, 0, 0, 0)
+
+[node name="ArrayMeshChunk" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_x6d4u")
+script = ExtResource("1_gxat7")
+surface_data = ExtResource("6_l3cqk")
+metadata/_custom_type_script = "uid://x4d6arcpv411"

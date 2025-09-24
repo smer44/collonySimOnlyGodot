@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TerrainSmartFunction" load_steps=2 format=3 uid="uid://c7budsaf1g68k"]
+
+[ext_resource type="Script" uid="uid://duu4rvdra5kox" path="res://grid_gen/terrain_smart_function.gd" id="1_dm30j"]
+
+[resource]
+script = ExtResource("1_dm30j")
+seed_2d = 1347
+elevation_scale = Vector2(0.05, 0.05)
+ground_scale = Vector3(0.1, 0.1, 0.1)
+dims = Vector3i(12, 6, 12)
+metadata/_custom_type_script = "uid://duu4rvdra5kox"

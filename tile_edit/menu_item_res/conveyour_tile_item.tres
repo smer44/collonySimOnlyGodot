@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SceneSelectionItem" load_steps=4 format=3 uid="uid://ynhvkxcposvd"]
+
+[ext_resource type="PackedScene" uid="uid://htsaka5ysr3" path="res://interactive_items/conveyor_tile_static_body_3d.tscn" id="1_1dmc7"]
+[ext_resource type="Texture2D" uid="uid://ciiggkttb34eb" path="res://tile_edit/icons/conveyour_tile_icon.png" id="1_gdg3n"]
+[ext_resource type="Script" uid="uid://e8k3scq4xqur" path="res://tile_edit/editor_scripts/scene_selection_item.gd" id="2_gdg3n"]
+
+[resource]
+script = ExtResource("2_gdg3n")
+scene = ExtResource("1_1dmc7")
+icon = ExtResource("1_gdg3n")

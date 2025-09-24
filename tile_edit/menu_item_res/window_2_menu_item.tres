@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SceneSelectionItem" load_steps=4 format=3 uid="uid://dhn8x0antxc5x"]
+
+[ext_resource type="Texture2D" uid="uid://dgxcm0w05ef17" path="res://tile_edit/icons/window2_icon.png" id="1_lbsg2"]
+[ext_resource type="PackedScene" uid="uid://d0dqkhmritxex" path="res://static_items/window2_prefab.tscn" id="2_8paoi"]
+[ext_resource type="Script" uid="uid://e8k3scq4xqur" path="res://tile_edit/editor_scripts/scene_selection_item.gd" id="3_wdnfx"]
+
+[resource]
+script = ExtResource("3_wdnfx")
+scene = ExtResource("2_8paoi")
+icon = ExtResource("1_lbsg2")
