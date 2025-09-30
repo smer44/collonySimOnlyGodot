@@ -1,0 +1,64 @@
+[gd_scene load_steps=14 format=3 uid="uid://dldx5fhka5w0i"]
+
+[ext_resource type="PackedScene" uid="uid://bsa6o5af57ogj" path="res://meshes/human_dummy_3d.tscn" id="1_kqjoc"]
+[ext_resource type="Script" uid="uid://f2nirnorsibx" path="res://person/person.gd" id="2_nrs7u"]
+[ext_resource type="Script" uid="uid://cfs70ma8fcolu" path="res://person/persons_need.gd" id="3_xn0ub"]
+[ext_resource type="Resource" uid="uid://o66j14yedqpg" path="res://tests/persons/drink_need.tres" id="4_j125t"]
+[ext_resource type="Resource" uid="uid://iqnn3bvxqcfu" path="res://tests/persons/fun_need.tres" id="5_1x201"]
+[ext_resource type="Script" uid="uid://3h0355pgkt2k" path="res://devices/usable_device.gd" id="6_1x201"]
+[ext_resource type="PackedScene" uid="uid://chxovomx6cl0q" path="res://usual_camera_setup.tscn" id="6_j125t"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tehj8"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tehj8"]
+points = PackedVector3Array(1.0158731, 0.015873017, 1.0158731, -1.0158731, -0.015873017, -1.0158731, -1.0158731, 0.015873017, -1.0158731, 1.0158731, -0.015873017, -1.0158731, -1.0158731, -0.015873017, 1.0158731, -1.0158731, 0.015873017, 1.0158731, 1.0158731, 0.015873017, -1.0158731, 1.0158731, -0.015873017, 1.0158731)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nrs7u"]
+albedo_color = Color(0.03137255, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kqjoc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nrs7u"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kqjoc"]
+albedo_color = Color(0, 1, 1, 1)
+
+[node name="PersonTest" type="Node3D"]
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_tehj8")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_tehj8")
+
+[node name="HumanDummy3D" parent="." instance=ExtResource("1_kqjoc")]
+script = ExtResource("2_nrs7u")
+needs = Array[ExtResource("3_xn0ub")]([ExtResource("4_j125t"), ExtResource("5_1x201")])
+
+[node name="DrinkSupplier" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.176702, 0.5, 0)
+material_override = SubResource("StandardMaterial3D_nrs7u")
+mesh = SubResource("BoxMesh_kqjoc")
+script = ExtResource("6_1x201")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="DrinkSupplier"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DrinkSupplier/StaticBody3D"]
+shape = SubResource("BoxShape3D_nrs7u")
+
+[node name="FunSupplier" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.572882, 0.5, 0)
+material_override = SubResource("StandardMaterial3D_kqjoc")
+mesh = SubResource("BoxMesh_kqjoc")
+script = ExtResource("6_1x201")
+usageType = 1
+
+[node name="StaticBody3D" type="StaticBody3D" parent="FunSupplier"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FunSupplier/StaticBody3D"]
+shape = SubResource("BoxShape3D_nrs7u")
+
+[node name="UsualCameraSetup" parent="." instance=ExtResource("6_j125t")]

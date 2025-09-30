@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Need" load_steps=2 format=3 uid="uid://iqnn3bvxqcfu"]
+
+[ext_resource type="Script" uid="uid://cfs70ma8fcolu" path="res://person/persons_need.gd" id="1_xvdsc"]
+
+[resource]
+script = ExtResource("1_xvdsc")
+name = &"Fun"
+metadata/_custom_type_script = "uid://cfs70ma8fcolu"
