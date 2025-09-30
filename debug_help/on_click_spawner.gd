@@ -17,14 +17,18 @@ func spawn():
 		return null
 	
 	var instance := packed_scene.instantiate()
-	(instance as Node3D).global_transform.origin = global_transform.origin
-	instance.get_child(0).linear_velocity.x = 1
-	#instance.get_child(0).apply_impulse(Vector3.ZERO, Vector3(1, 0, 0))
-	# Add to the active scene root ("world" root)
+	
 	var world_root: Node = get_tree().current_scene
 	if world_root == null:
 		world_root = get_tree().root	
 	world_root.add_child(instance)
+	
+	(instance as Node3D).global_transform.origin = global_transform.origin
+	instance.linear_velocity = Vector3(1, 0, 0)
+	#instance.get_child(0).linear_velocity.x = 1
+	#instance.get_child(0).apply_impulse(Vector3.ZERO, Vector3(1, 0, 0))
+	# Add to the active scene root ("world" root)
+	
 	
 	
 	
