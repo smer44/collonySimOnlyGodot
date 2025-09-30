@@ -1,22 +1,21 @@
 extends Node
-class_name CameraState
+class_name AbstractCameraState
 
+enum StateType {Stay, Hover, RaycastPrint, StayCursorRaycast, Spawning}
+@export var stateType : AbstractCameraState.StateType
 
-# The controller is the Camera3D (or script) that owns the state machine
-var controller: Node = null
-
-
-func enter() -> void:
+func enter(owner : CameraStatefull) -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)	
 	pass
 
 
-func exit() -> void:
+func exit(owner : CameraStatefull) -> void:
 	pass
 
 
-func unhandled_input(event: InputEvent) -> void:
+func input(owner : CameraStatefull, event: InputEvent) -> void:
 	pass
 
 
-func process(delta: float) -> void:
+func process(owner : CameraStatefull, delta: float) -> void:
 	pass

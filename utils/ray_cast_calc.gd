@@ -20,6 +20,11 @@ static func to_floor_2d(hit_2d : Vector2) -> Vector2i:
 	var grid_cell := Vector2i(floor(hit_2d.x), floor(hit_2d.y))
 	#print(grid_cell)
 	return grid_cell
+	
+static func to_floor_3d(hit_3d : Vector3) -> Vector3i:
+	var grid_cell := Vector3i(floor(hit_3d.x), floor(hit_3d.y), floor(hit_3d.z))
+	return grid_cell
+	
 
 
 static func horizontal_plane_intersect_floor(global_transform : Transform3D) -> Variant:
@@ -50,12 +55,35 @@ static func raycast_forward(node : Node3D, exclude: Array = [], ray_length: floa
 
 	var result: Dictionary = space_state.intersect_ray(query)
 
-
-	if debug_draw and result:
-		_debug_draw_ray(node, start, finish, result)
-
-
 	return result # Empty {} if no collision
+	
+
+static func raycast_from_cursor(camera: Camera3D, exclude: Array = [], ray_length: float = 100000.0 , collision_mask: int = 0xFFFFFFFF) -> Dictionary:
+	var viewport := camera.get_viewport()
+	# Mouse position in the current viewport
+	var mouse_pos: Vector2 = viewport.get_mouse_position()
+	# Build a world-space ray from the cursor via the camera
+	var origin: Vector3 = camera.project_ray_origin(mouse_pos)
+	var direction: Vector3 = camera.project_ray_normal(mouse_pos).normalized()
+	var finish: Vector3 = origin + direction * ray_length
+	# Avoid self-hits
+	exclude.append(camera)
+	# Raycast
+	var space_state: PhysicsDirectSpaceState3D = camera.get_world_3d().direct_space_state
+	var query := PhysicsRayQueryParameters3D.create(origin, finish)
+	
+	query.exclude = exclude
+	query.collision_mask = collision_mask
+	query.hit_from_inside = true
+	
+	var result: Dictionary = space_state.intersect_ray(query)
+	return result
+	
+	
+
+	
+	
+	
 	
 static func _debug_draw_ray(node : Node3D, start: Vector3, finish: Vector3, result: Dictionary) -> void:
 # Simple transient gizmo using ImmediateMesh in a MeshInstance3D child named "RayGizmo"
@@ -71,3 +99,5 @@ static func _debug_draw_ray(node : Node3D, start: Vector3, finish: Vector3, resu
 	im.surface_add_vertex(start)
 	im.surface_add_vertex(result.position if result.has("position") else finish)
 	im.surface_end()
+	
+	

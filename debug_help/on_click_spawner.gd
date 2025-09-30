@@ -6,7 +6,7 @@ class_name OnClickPivotSpawner
 
 
 # Spawn when left mouse button is pressed
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		spawn()
 
@@ -18,7 +18,8 @@ func spawn():
 	
 	var instance := packed_scene.instantiate()
 	(instance as Node3D).global_transform.origin = global_transform.origin
-	instance.get_child(0).apply_impulse(Vector3.ZERO, Vector3(1, 0, 0))
+	instance.get_child(0).linear_velocity.x = 1
+	#instance.get_child(0).apply_impulse(Vector3.ZERO, Vector3(1, 0, 0))
 	# Add to the active scene root ("world" root)
 	var world_root: Node = get_tree().current_scene
 	if world_root == null:

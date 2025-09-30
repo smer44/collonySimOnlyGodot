@@ -27,9 +27,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		yaw   -= event.relative.x * mouse_sensitivity
 		pitch -= event.relative.y * mouse_sensitivity
 		pitch = clamp(pitch, deg_to_rad(-89), deg_to_rad(89))
+		update_rotation_by_yaw_and_pitch()
 		
-		rotation.y = yaw
-		rotation.x = pitch
+
+		
+func update_rotation_by_yaw_and_pitch():
+	rotation.y = yaw
+	rotation.x = pitch	
 		
 func _process(delta: float) -> void:
 	var movement := InputCalc.wasd_move(delta,self.basis,move_speed,shift_speed)

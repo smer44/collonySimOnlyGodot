@@ -1,8 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://chxovomx6cl0q"]
+[gd_scene load_steps=11 format=3 uid="uid://chxovomx6cl0q"]
 
-[ext_resource type="Script" uid="uid://jcvuniltb8vq" path="res://utils/wasd_move_mouse_rotate.gd" id="1_0ycvh"]
+[ext_resource type="Script" uid="uid://cffy1afot41f1" path="res://camera_states/camera_statefull.gd" id="1_rw75i"]
 [ext_resource type="Script" uid="uid://ceyxoiygmljtj" path="res://debug_help/on_click_spawner.gd" id="2_dnwcs"]
 [ext_resource type="PackedScene" uid="uid://dvobdvhild42y" path="res://debug_help/rigid_ball_3d.tscn" id="3_ot7sw"]
+[ext_resource type="Script" uid="uid://cr25mr577rbhf" path="res://camera_states/hover_camera_state.gd" id="4_w87d2"]
+[ext_resource type="Script" uid="uid://bqepha1m5hfvc" path="res://camera_states/abstract_camera_state.gd" id="5_rw75i"]
+[ext_resource type="Script" uid="uid://bipcj47vv23so" path="res://camera_states/raycast_print_camera_state.gd" id="6_djr38"]
+[ext_resource type="Script" uid="uid://bcylyxulc5l1m" path="res://debug_help/cross_in_center_ui.gd" id="7_jk4bl"]
+[ext_resource type="Script" uid="uid://d3j3aseoye3n1" path="res://camera_states/stay_cursor_raycast_camera_state.gd" id="7_uk28j"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_5qlsg"]
 
@@ -12,12 +17,30 @@
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2469683, 3.3505445)
-script = ExtResource("1_0ycvh")
-hide_cursor = true
+script = ExtResource("1_rw75i")
 
 [node name="SpawnPivotNode3d" type="Node3D" parent="Camera3D"]
 script = ExtResource("2_dnwcs")
 packed_scene = ExtResource("3_ot7sw")
+
+[node name="HoverCameraState" type="Node" parent="Camera3D"]
+script = ExtResource("4_w87d2")
+stateType = 1
+metadata/_custom_type_script = "uid://cr25mr577rbhf"
+
+[node name="StayCameraState" type="Node" parent="Camera3D"]
+script = ExtResource("5_rw75i")
+metadata/_custom_type_script = "uid://bqepha1m5hfvc"
+
+[node name="RaycastCameraState" type="Node" parent="Camera3D"]
+script = ExtResource("6_djr38")
+stateType = 2
+metadata/_custom_type_script = "uid://bqepha1m5hfvc"
+
+[node name="StayCursorRaycastCameraState" type="Node" parent="Camera3D"]
+script = ExtResource("7_uk28j")
+stateType = 3
+metadata/_custom_type_script = "uid://d3j3aseoye3n1"
 
 [node name="DebugCube" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_5qlsg")
@@ -32,3 +55,10 @@ transform = Transform3D(1, 0, 0, 0, 0.7726893, 0.63478446, 0, -0.63478446, 0.772
 
 [node name="RigidBall3D" parent="." instance=ExtResource("3_ot7sw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5157833, 0)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_jk4bl")
