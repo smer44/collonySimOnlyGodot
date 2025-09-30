@@ -1,30 +1,33 @@
 extends Node3D
 class_name TileEditor
 
-@export var ground_y: float = 0.0  # Elevation of the ground plane (y = ground_y)
-@export var prefab: PackedScene               # Drag your scene here in the Inspector
-@export var wireframe_prefab: PackedScene # Prefab: wireframe cube of size 1
-@export var shadow_color: Color = Color(0.2, 0.6, 1.0, 0.35) # Color/tint for the prefab "shadow" (ghost)
-@export var grid: DummyGrid
+# --- Exported parameters ---
+@export var ground_y: float = 0.0			# Elevation of the ground plane (y = ground_y)
+@export var prefab: PackedScene				# Drag your scene here in the Inspector
+@export var wireframe_prefab: PackedScene	# Prefab: wireframe cube of size 1
+@export var shadow_color: Color = Color(0.2, 0.6, 1.0, 0.35)		# Color/tint for the prefab "shadow" (ghost)
+@export var grid: DummyGrid			# Optional grid reference (custom)
 
-#var angle_deg: float = 0.0 # Yaw angle in degrees for spawned prefabs
-var spawn_dir: int= 0 # direction in form of 0= front, 1 = left, 2 = back, 3 = right
-var wireframe : Node3D
-var preview_instance: Node3D
-var mouse_off = true
+# --- Internal state ---
+#var angle_deg: float = 0.0 	# Yaw angle in degrees for spawned prefabs
+var spawn_dir: int= 0 			# direction in form of 0= front, 1 = left, 2 = back, 3 = right
+var wireframe : Node3D			# Wireframe preview instance
+var preview_instance: Node3D	# Actual prefab preview inside the wireframe
+var mouse_off = true			# Tracks whether mouse is free or captured
 
 func _ready():
+	# Instantiate wireframe preview
 	wireframe = wireframe_prefab.instantiate()
 	add_child(wireframe)
 	wireframe.global_position = Vector3.ZERO
 	_update_wireframe()
 	
-	
+# --- Change the prefab being used ---
 func set_prefab(new_prefab: PackedScene ):
 	prefab = new_prefab
 	_update_wireframe()
 	
-	
+# --- Toggle mouse capture/confinement ---
 func toggle_mouse_mode():
 	mouse_off = not mouse_off
 	if mouse_off:
@@ -33,27 +36,28 @@ func toggle_mouse_mode():
 		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 		
 	
-	
+# --- Instantiate a new wireframe preview with shadow coloring ---
 func _update_wireframe():
 	var children  = wireframe.get_children()
 	if len(children)  == 2:
-		children[1].free()
+		children[1].free()		# Remove previous preview
 	preview_instance = prefab.instantiate()
 	wireframe.add_child(preview_instance)
 	set_shadow_color_all(wireframe,shadow_color)
 		 
 	
 	
-
+# --- Main frame update ---
 func _process(delta: float) -> void:
 	var hit = _get_pointer()	
 	if hit:
 		wireframe.global_position = hit
 		
-
+# --- Update wireframe rotation based on spawn_dir ---
 func _update_wireframe_rotation() -> void:
 	(wireframe as Node3D).global_rotation = Vector3(0.0, deg_to_rad(spawn_dir*90), 0.0)
 
+# --- Recursively apply shadow color and make unshaded ---
 func set_shadow_color_all(node: Node,   color: Color):
 	if node is GeometryInstance3D:
 		var gi := node as GeometryInstance3D
@@ -68,12 +72,13 @@ func set_shadow_color_all(node: Node,   color: Color):
 		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA		
 		gi.material_override = mat
 		gi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	# Apply recursively to children
 	for child in node.get_children():
 		set_shadow_color_all(child,color)
 
 
 
-
+# --- Handle mouse clicks and keyboard input ---
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 
@@ -96,12 +101,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			toggle_mouse_mode()
 			
 		
-			
+# --- Rotate spawn direction 90° clockwise ---
 func _rotate_angle_90() -> void:
 	#angle_deg = fposmod(deg_to_rad(spawn_dir*90), 360.0)
 	spawn_dir = (spawn_dir+1) % 4
 	
-
+# --- Raycast from mouse pointer to ground plane ---
 func _get_pointer():
 	var cam := get_viewport().get_camera_3d()
 	if cam == null:
@@ -115,17 +120,19 @@ func _get_pointer():
 	if hit == null:
 		return null 
 	var pos : Vector3  = (hit as Vector3)
+	
+	# Snap to grid centers
 	pos = Vector3(floor(pos.x)+0.5, floor(pos.y)+0.5, floor(pos.z)+0.5)
 	return pos
 				
 
-
+# --- Called when mouse clicks nothing on the ground ---
 func _on_no_ground_click() -> void:
 	print("Ground NOT hit ",)
 	#make wireframe_prefab not visible
 	#wireframe.visible = false
 	
-
+# --- Called when mouse clicks on the ground ---
 func _on_ground_click(pos: Vector3) -> void:
 	print("Ground hit at: ", pos)
 	var base := Vector3(floor(pos.x), floor(pos.y), floor(pos.z))
@@ -134,7 +141,7 @@ func _on_ground_click(pos: Vector3) -> void:
 	#wireframe.visible = true
 	_spawn_prefab_at(pos)
 	
-	
+# --- Spawn prefab instance at a given position ---
 func _spawn_prefab_at(pos: Vector3) -> void:
 	var inst := prefab.instantiate()
 	get_tree().current_scene.add_child(inst)
