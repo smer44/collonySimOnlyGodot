@@ -3,13 +3,19 @@ class_name HPA
 
 var ele_need :=10
 var eps := 0.001
-
+var grid: AbstractTerrainElevationGenerator
 #const steps := [  Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT,	Vector2i.UP]
 const steps_len := 4
 const directions := [  Vector2i.RIGHT, Vector2i.DOWN, Vector2i.RIGHT,	Vector2i.DOWN]
 const vdirections := [  Vector2i.UP, Vector2i.LEFT, Vector2i.DOWN,	Vector2i.RIGHT]
 
-func walkable(grid: TerrainFunction, cell:Vector2i):
+#TODO - sometimes it marks one cell more for border window.
+
+func _init(grid: AbstractTerrainElevationGenerator):
+	self.grid = grid
+	
+
+func walkable(cell:Vector2i):
 	var ele:= grid.get_elevation_at(cell.x,cell.y)
 	return  abs(ele - ele_need) <= eps
 	
@@ -17,7 +23,7 @@ func set_ele(ele):
 	self.ele_need = ele
 	
 	
-func find_all_windows(grid:TerrainFunction, bounds_block_a: Vector2i, block_bounds_b: Vector2i, bounds_a: Vector2i, bounds_b: Vector2i)-> Array:
+func find_all_windows(bounds_block_a: Vector2i, block_bounds_b: Vector2i, bounds_a: Vector2i, bounds_b: Vector2i)-> Array:
 	var all_windows := []
 	var top_right:= bounds_block_a + Vector2i(block_bounds_b.x,0)
 	var bottom_left :=  bounds_block_a + Vector2i(0,block_bounds_b.y) 
@@ -35,7 +41,7 @@ func find_all_windows(grid:TerrainFunction, bounds_block_a: Vector2i, block_boun
 		var vstep :Vector2i= vdirections[i]
 		
 		
-		var next_window = find_next_window(grid,p,row_end,bounds_a,bounds_b,step,vstep)
+		var next_window = find_next_window(p,row_end,bounds_a,bounds_b,step,vstep)
 		#print("HPA: window found : %s" %[next_window])
 		while (next_window != null):
 			#print("HPA: i = %s along step %s window found : %s" %[ i, step,next_window])
@@ -44,7 +50,7 @@ func find_all_windows(grid:TerrainFunction, bounds_block_a: Vector2i, block_boun
 			if p == row_end:
 				next_window = null 
 			else:
-				next_window = find_next_window(grid,p,row_end,bounds_a,bounds_b,step,vstep)
+				next_window = find_next_window(p,row_end,bounds_a,bounds_b,step,vstep)
 		print("HPA:for: i = %s along step %s ,bounds : %s , %s : found windows: %s" %[ i, step, bounds_begins[i], row_end, windows_for_border])
 		all_windows.append(windows_for_border)
 		
@@ -74,7 +80,7 @@ func all_windows_to_all_border_points(all_windows : Array) -> Array:
 	
 	
 
-func find_next_window(grid: TerrainFunction,bounds_block_a: Vector2i, bounds_block_end: Vector2i,bounds_a: Vector2i, bounds_b: Vector2i, step: Vector2i, vstep: Vector2i) :
+func find_next_window(bounds_block_a: Vector2i, bounds_block_end: Vector2i,bounds_a: Vector2i, bounds_b: Vector2i, step: Vector2i, vstep: Vector2i) :
 	
 	#if -step leads outside of the bounds there is no next window for this side:
 	var vnbr := bounds_block_a - vstep
@@ -84,14 +90,14 @@ func find_next_window(grid: TerrainFunction,bounds_block_a: Vector2i, bounds_blo
 	var nbr := bounds_block_a
 	
 	#find first walkable pair:
-	while not  (walkable(grid,nbr) and walkable(grid,vnbr)):
+	while not  (walkable(nbr) and walkable(vnbr)):
 		if nbr == bounds_block_end:			
 			return null
 		nbr += step
 		vnbr+= step
 	var window_begin := nbr
 	#traverse untill it is walkable or end:
-	while walkable(grid,nbr) and walkable(grid,vnbr):
+	while walkable(nbr) and walkable(vnbr):
 		if nbr == bounds_block_end:
 			break
 		nbr += step

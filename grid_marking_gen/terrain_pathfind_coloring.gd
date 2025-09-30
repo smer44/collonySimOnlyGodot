@@ -1,13 +1,14 @@
-extends TerrainFunction
-class_name TerrainPathfindfunction
+extends AbstractTerrainColoring
+class_name TerrainPathfindColoring
 
 #this class will "mark" path found on the given terrain by its elevation.
 #the pathfind is done in precalc.
 
 
 
-var find_algo := AStarMy.new()
-@export var terrain : TerrainFunction
+var find_algo : AStarMy
+@export var terrain : AbstractTerrainElevationGenerator
+@export var coloring : AbstractTerrainColoring
 @export var start := Vector2i(0,0)
 @export var goal := Vector2i(0,0)
 @export var bounds_start := Vector2i.ZERO
@@ -21,7 +22,9 @@ func get_elevation_at(x:int, z:int) -> float:
 func precalc()-> void:
 	#push_error("TerrainFunction.precalc must be implemented in subclass: %s" % self)
 	terrain.precalc()
-	var path_array :Array= find_algo.find(terrain,start,goal, bounds_start, bounds_inclusive)
+	coloring.precalc()
+	find_algo = AStarMy.new(terrain)
+	var path_array :Array= find_algo.find(start,goal, bounds_start, bounds_inclusive)
 	path.clear()
 	for p in path_array:
 		path[p] = true 
@@ -35,7 +38,7 @@ func get_color_at(x:int, y:int, z:int) -> Color:
 	var p := Vector2i(x,z)
 	if p in path:
 		return Color.RED
-	return terrain.get_color_at(x,y,z)
+	return coloring.get_color_at(x,y,z)
 	
 	
 		

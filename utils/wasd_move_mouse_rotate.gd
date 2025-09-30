@@ -32,65 +32,20 @@ func _unhandled_input(event: InputEvent) -> void:
 		rotation.x = pitch
 		
 func _process(delta: float) -> void:
-	wasd_move(delta)
-	up_down_move(delta)
+	var movement := InputCalc.wasd_move(delta,self.basis,move_speed,shift_speed)
+	#wasd_move(delta)	
+	movement.y += InputCalc.up_down_move(delta,move_speed,shift_speed)
+	
+	global_position+= movement
+	
 	if grid_tracking_enabled:
-		update_grid_cell()
-
-func wasd_move(delta: float) -> void:
-	var axis = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	
-	# Build a horizontal move vector relative to current yaw
-	var forward := self.basis.z        # local forward
-	var right   :=  self.basis.x        # local right
-	forward.y = 0
-	right.y = 0
-	forward = forward.normalized()
-	right = right.normalized()
-	
-	if axis != Vector2.ZERO:
-		var world_dir = right * axis.x + forward * axis.y
-		var drawFrom = Vector3.ZERO
-		var speed := move_speed
-		if Input.is_key_pressed(KEY_SHIFT):
-			speed *= shift_speed
-		#DebugDraw3D.draw_line(drawFrom, drawFrom+direction*5, Color.GREEN)
-		global_position += world_dir * speed * delta
-		
-func up_down_move(delta:float) :
-	var direction := 0.0
-
-	if Input.is_action_pressed("ui_accept"): # By default, Space is mapped to ui_accept
-		direction += 1.0
-	if Input.is_key_pressed(KEY_CTRL): # Specifically left control key
-		direction -= 1.0	
-	if direction != 0.0:
-		var speed := move_speed
-		if Input.is_key_pressed(KEY_SHIFT):
-			speed *= shift_speed			
-		global_position.y += direction * speed * delta	
+		#var hit = RayCastCalc.horizontal_plane_intersect_floor(global_transform)
+		#if hit:
+		#	print(hit)
+		var raycast = RayCastCalc.raycast_forward(self)
+		if raycast:
+			print(raycast.position)
 		
 
-func ray_intersect_y0() -> Variant:
-	var o: Vector3 = global_transform.origin
-	var d: Vector3 = (-global_transform.basis.z).normalized() # camera forward
-	if abs(d.y) < 0.000001:
-		return null # ray parallel to plane
-	var t: float = -o.y / d.y
-	if t <= 0.0:
-		return null # intersection is behind the camera or at origin
-	var p: Vector3 = o + d * t
-	return Vector2(p.x, p.z)
-	
-# --- Added: update stored integer grid cell and print on change ---
-func update_grid_cell() -> void:
-	var hit_2d = ray_intersect_y0()
-	if hit_2d == null:
-		return
-	var cell := Vector2i(floor(hit_2d.x), floor(hit_2d.y))
-	if cell != grid_cell:
-		grid_cell = cell
-		print(grid_cell)
 
-
-# --- Added: handle CapsLock toggle ---
+		

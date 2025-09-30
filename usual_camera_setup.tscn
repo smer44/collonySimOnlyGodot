@@ -1,8 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://chxovomx6cl0q"]
+[gd_scene load_steps=6 format=3 uid="uid://chxovomx6cl0q"]
 
 [ext_resource type="Script" uid="uid://jcvuniltb8vq" path="res://utils/wasd_move_mouse_rotate.gd" id="1_0ycvh"]
+[ext_resource type="Script" uid="uid://ceyxoiygmljtj" path="res://debug_help/on_click_spawner.gd" id="2_dnwcs"]
+[ext_resource type="PackedScene" uid="uid://dvobdvhild42y" path="res://debug_help/rigid_ball_3d.tscn" id="3_ot7sw"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_5qlsg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2djan"]
 
 [node name="UsualCameraSetup" type="Node3D"]
 
@@ -11,8 +15,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2469683, 3.3505445)
 script = ExtResource("1_0ycvh")
 hide_cursor = true
 
+[node name="SpawnPivotNode3d" type="Node3D" parent="Camera3D"]
+script = ExtResource("2_dnwcs")
+packed_scene = ExtResource("3_ot7sw")
+
 [node name="DebugCube" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_5qlsg")
 
+[node name="StaticBody3D" type="StaticBody3D" parent="DebugCube"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DebugCube/StaticBody3D"]
+shape = SubResource("BoxShape3D_2djan")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.7726893, 0.63478446, 0, -0.63478446, 0.7726893, 0, 0, 0)
+
+[node name="RigidBall3D" parent="." instance=ExtResource("3_ot7sw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5157833, 0)
