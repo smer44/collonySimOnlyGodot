@@ -3,8 +3,13 @@ class_name AStarMy
 
 var eps := 0.001
 var ele_need :=10
+var grid: AbstractTerrainElevationGenerator
 
-func walkable(grid: TerrainFunction, cell:Vector2i):
+func _init(grid: AbstractTerrainElevationGenerator):
+	self.grid = grid
+
+
+func walkable(cell:Vector2i):
 	var ele:= grid.get_elevation_at(cell.x,cell.y)
 	return  abs(ele - ele_need) <= eps
 	
@@ -36,7 +41,7 @@ func _reconstruct_path(came_from: Dictionary, current: Vector2i) -> Array:
 	path.reverse()
 	return path
 
-func find(grid: TerrainFunction, start: Vector2i, goal: Vector2i,  bound_a: Vector2i, bound_b: Vector2i ) -> Array:
+func find(start: Vector2i, goal: Vector2i,  bound_a: Vector2i, bound_b: Vector2i ) -> Array:
 	var p := start
 	ele_need = grid.get_elevation_at(p.x,p.y)
 	
@@ -44,7 +49,7 @@ func find(grid: TerrainFunction, start: Vector2i, goal: Vector2i,  bound_a: Vect
 	assert (GridCheck.is_inside_boundary(start,bound_a,bound_b), "AStarMy: start %s is outside of boundary %s : %s" % [start, bound_a, bound_b])
 	assert (GridCheck.is_inside_boundary(goal,bound_a,bound_b), "AStarMy: goal %s is outside of boundary %s : %s" % [goal, bound_a, bound_b])
 	
-	if not  (walkable(grid, p)  or walkable(grid,goal)):
+	if not  (walkable(p)  or walkable(goal)):
 		print("AStarMy: short fail")
 		return ret
 	
@@ -85,7 +90,7 @@ func find(grid: TerrainFunction, start: Vector2i, goal: Vector2i,  bound_a: Vect
 		for dn in GridCheck.get_nbrs_delta(p,bound_a,bound_b,GridCheck.nbrs8):
 			var n := p + dn
 			#var cell = grid[n.x][n.y]
-			if not walkable(grid,n) or closed.has(n):
+			if not walkable(n) or closed.has(n):
 				continue 
 			var tentative_g :float= g.get(p,INF) + heuristic_nbr(dn)
 			if tentative_g < g.get(n, INF):

@@ -6,6 +6,4 @@
 script = ExtResource("1_dm30j")
 seed_2d = 1347
 elevation_scale = Vector2(0.05, 0.05)
-ground_scale = Vector3(0.1, 0.1, 0.1)
-dims = Vector3i(12, 6, 12)
 metadata/_custom_type_script = "uid://duu4rvdra5kox"

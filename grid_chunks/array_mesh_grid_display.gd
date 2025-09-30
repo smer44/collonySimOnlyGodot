@@ -3,28 +3,43 @@ extends MeshInstance3D
 
 #ArrayMesh
 
-@export var surface_function: TerrainFunction
+@export var surface_generator: AbstractTerrainElevationGenerator
+@export var coloring_generator: AbstractTerrainColoring
+
 @export var origin_x := 0
 @export var origin_z := 0
 @export var width := 32
 @export var depth := 32
 @export var epsilon: float = 0.0001 # threshold for elevation difference
+@export var collisionShape3D : CollisionShape3D
 
 
 func _ready() -> void:
-	assert(surface_function != null, "ArrayMeshGridDisplay: surface_function is not set")
+	assert(surface_generator != null, "ArrayMeshGridDisplay: surface_generator is not set")
+	assert(coloring_generator != null, "ArrayMeshGridDisplay: coloring_generator is not set")
+	
+	surface_generator.precalc()
+	coloring_generator.precalc()	
+	
 	var  m := ArrayMesh.new()
 	self.material_override = new_mat_with_vertex_color()
-	surface_function.precalc()
+
 	build_chunk(m,origin_x,origin_z,width,depth)
+	
+	if collisionShape3D:
+		var concave_shape: ConcavePolygonShape3D = m.create_trimesh_shape()
+		collisionShape3D.shape = concave_shape
 	
 	self.mesh = m
 	
 func new_mat_with_vertex_color() -> StandardMaterial3D:
 	var mat := StandardMaterial3D.new()
 	mat.vertex_color_use_as_albedo = true	
-	#mat.
 	return mat
+	
+
+
+	
 
 
 func build_chunk(mesh : ArrayMesh, origin_x:int, origin_z:int, width:int, depth:int) -> void:
@@ -71,9 +86,11 @@ func build_chunk(mesh : ArrayMesh, origin_x:int, origin_z:int, width:int, depth:
 
 
 			# Flat elevation per cell (you can switch to per-corner later)
-			var y := surface_function.get_elevation_at(x, z)
-			#print("ArrayMeshChunk : %s "  %[  y ])
-			var cell_color : Color = surface_function.get_color_at(x, y, z)
+			var y := surface_generator.get_elevation_at(x, z)
+			#print("ArrayMeshGridDisplay : elevation : %s "  %[  y ])
+			var cell_color : Color = coloring_generator.get_color_at(x, y, z)
+			#print("ArrayMeshGridDisplay cell_color : %s" % cell_color)
+			#var cell_color : Color = Color.RED
 
 
 # 4 vertices in local order: (x,z) (x+1,z) (x+1,z+1) (x,z+1)

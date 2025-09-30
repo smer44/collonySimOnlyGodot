@@ -1,5 +1,5 @@
-extends TerrainFunction
-class_name TerrainBresenhamCircle
+extends AbstractTerrainColoring
+class_name TerrainBresenhamCircleColoring
 
 # Parameters
 @export var radius: int = 8
@@ -27,9 +27,10 @@ func bresenham_8_arc( r: int) -> Array[Vector2i]:
 	return pts
 	
 func next():
-	var ele :float= get_elevation_at(0,0)
-	var elei :int= -1.0 if ele > 0.0 else ele
-	return [Vector3i(0,elei,0)]
+	pass
+	#var ele :float= get_elevation_at(0,0)
+	#var elei :int= -1.0 if ele > 0.0 else ele
+	#return [Vector3i(0,elei,0)]
 
 func precalc():
 	var width := radius * 2 + 2
@@ -55,7 +56,7 @@ func precalc():
 		grid[radius-p.y][radius+p.x] = true
 	#print(grid)
 		
-func get_elevation_at(x: int, z: int) -> float:
+func get_elevation_at_old(x: int, z: int) -> float:
 	var width := radius * 2 + 2
 	var height := radius * 2 + 2	
 	if z < 0 or z >= height or x < 0 or x >= width:

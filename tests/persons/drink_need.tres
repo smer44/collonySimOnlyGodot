@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Need" load_steps=2 format=3 uid="uid://o66j14yedqpg"]
+
+[ext_resource type="Script" uid="uid://cfs70ma8fcolu" path="res://person/persons_need.gd" id="1_ix35n"]
+
+[resource]
+script = ExtResource("1_ix35n")
+name = &"Drink"
+growth_rate_per_sec = 3.0
+priority_curve = 1
+metadata/_custom_type_script = "uid://cfs70ma8fcolu"

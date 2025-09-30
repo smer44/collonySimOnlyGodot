@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dwdfgk5hnneq5" path="res://tile_edit/editor_scripts/tile_editor_node_3d.gd" id="1_f4dsk"]
 [ext_resource type="Script" uid="uid://jcvuniltb8vq" path="res://utils/wasd_move_mouse_rotate.gd" id="2_f0tba"]
 [ext_resource type="PackedScene" uid="uid://bpjrs7ak7evte" path="res://static_items/wall_border_item.tscn" id="2_jx2ws"]
-[ext_resource type="PackedScene" uid="uid://dcn6v1ke5ujsd" path="res://wireframe_cube.tscn" id="3_6yos3"]
+[ext_resource type="PackedScene" uid="uid://dcn6v1ke5ujsd" path="res://meshes/wireframe_cube.tscn" id="3_6yos3"]
 [ext_resource type="Texture2D" uid="uid://c4bbrgnhsx7pd" path="res://textures/grass.png" id="5_hnega"]
 [ext_resource type="Script" uid="uid://ca3a40bcfl52x" path="res://tile_edit/editor_scripts/scene_item_selector.gd" id="6_jx2ws"]
 [ext_resource type="Script" uid="uid://e8k3scq4xqur" path="res://tile_edit/editor_scripts/scene_selection_item.gd" id="7_ar7m3"]

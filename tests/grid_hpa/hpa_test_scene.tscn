@@ -1,13 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7htlkb7m0vlu"]
+[gd_scene load_steps=5 format=3 uid="uid://b7htlkb7m0vlu"]
 
 [ext_resource type="Script" uid="uid://x4d6arcpv411" path="res://grid_chunks/array_mesh_grid_display.gd" id="1_6jhip"]
 [ext_resource type="Resource" uid="uid://bpko1xph13v5h" path="res://tests/grid_big_pathfind/terrain_big_gen.tres" id="2_na8on"]
+[ext_resource type="Resource" uid="uid://b5cvjq4y8cd4m" path="res://tests/grid_hpa/hpa_debug_show_for_test.tres" id="3_na8on"]
+[ext_resource type="PackedScene" uid="uid://chxovomx6cl0q" path="res://usual_camera_setup.tscn" id="4_ujppl"]
 
 [node name="Node3D" type="Node3D"]
 
 [node name="ArrayMeshGridDisplay" type="MeshInstance3D" parent="."]
 script = ExtResource("1_6jhip")
-surface_function = ExtResource("2_na8on")
+surface_generator = ExtResource("2_na8on")
+coloring_generator = ExtResource("3_na8on")
 width = 200
 depth = 200
 metadata/_custom_type_script = "uid://x4d6arcpv411"
+
+[node name="UsualCameraSetup" parent="." instance=ExtResource("4_ujppl")]
