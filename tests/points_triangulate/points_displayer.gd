@@ -1,9 +1,10 @@
 extends Control
+class_name PointDisplayer
 
 
 #var display_scale:float= min(size.x, size.y)
 @export var display_scale:float= 40.0
-@export var point_radius: float = 4.0
+@export var point_radius: float = 2.0
 @export var point_color: Color = Color.RED
 @export var rect_color: Color = Color.BLUE
 @export var triangle_color: Color = Color.GREEN
@@ -18,7 +19,8 @@ var _is_panning: bool = false
 
 
 func _ready() -> void:
-	pts = Random2dCalc.sample_naive(20,0.1,3)
+	self.set_anchors_preset(Control.PRESET_FULL_RECT)
+	pts = Random2dCalc.sample_naive(100,0.01,3)
 	print("Points gen test: pts :" , pts)
 	print("Points gen test: display_scale:" , display_scale)
 	bbox = TriangulateCalc.bouding_box_2d(pts)
@@ -55,13 +57,27 @@ func scale_point_from_center(p: Vector2) -> Vector2:
 	var center = size * 0.5
 	return center + pan_offset +p * display_scale
 	
+func screen_to_point_coord(p:Vector2) ->Vector2:
+	var center = size * 0.5
+	return  (p - center - pan_offset) /display_scale
+	
 func scale_point_by_bounds(p: Vector2) -> Vector2:
 	return pan_offset + p * display_scale
 
 func draw_points(pts: Array[Vector2] ):
 	for p in pts:
 		var scaled_p = scale_point_from_center(p)
-		draw_circle(scaled_p, point_radius, point_color)			
+		draw_circle(scaled_p, point_radius, point_color)		
+		
+func draw_point(p :Vector2, r: float , c : Color ):
+	var scaled_p = scale_point_from_center(p)
+	draw_circle(scaled_p, r, c)	
+			
+
+func draw_my_line(a:Vector2, b : Vector2, c:Color, w:float):
+	a = scale_point_from_center(a)
+	b = scale_point_from_center(b)
+	draw_line(a,b,c,w)
 
 func draw_my_rect(r : Rect2):
 	var scaled_rect = Rect2(scale_point_from_center(r.position), r.size * display_scale)
@@ -79,5 +95,3 @@ func _draw():
 	draw_my_rect(bbox)
 	for tri in triangulation:
 		draw_scaled_triangle(tri)
-
-	

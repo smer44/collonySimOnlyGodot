@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bsus71qyj6cku" path="res://tests/clothcombination/t_shirt_dummy.tscn" id="5_3rct5"]
 [ext_resource type="PackedScene" uid="uid://xpg3p150iy82" path="res://tests/clothcombination/bra_dummy.tscn" id="6_dahb5"]
 
-[node name="Node3D" type="Node3D" node_paths=PackedStringArray("all_pieces", "pieces")]
+[node name="ClothCombinationDemoNode3D" type="Node3D" node_paths=PackedStringArray("all_pieces", "pieces")]
 script = ExtResource("1_btkco")
 all_pieces = [NodePath("jacket dummy"), NodePath("open jacket dummy"), NodePath("T-shirt dummy"), NodePath("bra dummy")]
 pieces = [NodePath("open jacket dummy"), NodePath("T-shirt dummy")]

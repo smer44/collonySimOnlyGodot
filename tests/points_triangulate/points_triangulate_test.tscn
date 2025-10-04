@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c5n0ha1rn46wk"]
 
-[ext_resource type="Script" uid="uid://dpn3no0ldmvcb" path="res://tests/points_gen/points_displayer.gd" id="1_gmxfv"]
+[ext_resource type="Script" uid="uid://dpn3no0ldmvcb" path="res://tests/points_triangulate/points_displayer.gd" id="1_gmxfv"]
 
 [node name="TriangulateTestRootNode3D" type="Node3D"]
 

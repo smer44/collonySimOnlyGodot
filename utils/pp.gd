@@ -2,6 +2,16 @@ extends Node
 class_name PP
 
 
+static func pp_quad_tree(q:QuadTree, indent : int = 0):
+	var prefix := " ".repeat(indent)
+	print(prefix + str(q.boundary) + " points=" + str(q.points))
+	if q.divided:
+		pp_quad_tree(q.nw, indent + 1)
+		pp_quad_tree(q.ne, indent + 1)
+		pp_quad_tree(q.sw, indent + 1)
+		pp_quad_tree(q.se, indent + 1)
+
+
 static func pp_dict_of_lists(d: Dictionary, indent: int = 0) -> String:
 	var IND := " ".repeat(indent)
 	var OUT := IND + "{\n"

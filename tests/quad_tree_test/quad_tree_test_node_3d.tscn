@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpa34t0seh4l4"]
+
+[ext_resource type="Script" uid="uid://dasw4ruyphv4q" path="res://tests/quad_tree_test/quad_tree_test.gd" id="1_k3o1g"]
+
+[node name="QuadTreeTestNode3D" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k3o1g")
