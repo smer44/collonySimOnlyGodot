@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://d1ty658lc6s7s"]
+
+[ext_resource type="PackedScene" uid="uid://cjjf0kjq05spr" path="res://fbx_imports/jacket dummy.fbx" id="1_3piuy"]
+[ext_resource type="Script" uid="uid://db1k00cuu3jn" path="res://tests/clothcombination/cloth_part.gd" id="2_ch1bs"]
+[ext_resource type="Script" uid="uid://cdybq4hxku0fa" path="res://tests/clothcombination/cloth_piece.gd" id="2_pj7a6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ch1bs"]
+albedo_color = Color(0.047058824, 1, 0.05490196, 1)
+
+[node name="jacket dummy" instance=ExtResource("1_3piuy")]
+script = ExtResource("2_pj7a6")
+
+[node name="Arms" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_ch1bs")
+script = ExtResource("2_ch1bs")
+min_priority = 5
+max_priority = 5
+
+[node name="LowerBody" parent="." index="1"]
+material_override = SubResource("StandardMaterial3D_ch1bs")
+script = ExtResource("2_ch1bs")
+min_priority = 5
+max_priority = 5
+
+[node name="MidBody" parent="." index="2"]
+material_override = SubResource("StandardMaterial3D_ch1bs")
+script = ExtResource("2_ch1bs")
+min_priority = 5
+max_priority = 5
+
+[node name="UpperBody" parent="." index="3"]
+material_override = SubResource("StandardMaterial3D_ch1bs")
+script = ExtResource("2_ch1bs")
+min_priority = 5
+max_priority = 5

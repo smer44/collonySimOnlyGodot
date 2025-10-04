@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://xpg3p150iy82"]
+
+[ext_resource type="PackedScene" uid="uid://dfnge6ifa8bgy" path="res://fbx_imports/bra dummy.fbx" id="1_tguha"]
+[ext_resource type="Script" uid="uid://cdybq4hxku0fa" path="res://tests/clothcombination/cloth_piece.gd" id="2_kpenc"]
+[ext_resource type="Script" uid="uid://db1k00cuu3jn" path="res://tests/clothcombination/cloth_part.gd" id="3_t4fw3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_th4yc"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="bra dummy" instance=ExtResource("1_tguha")]
+script = ExtResource("2_kpenc")
+
+[node name="UpperBody" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_th4yc")
+script = ExtResource("3_t4fw3")

@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://bq54hwe2sq8yp"]
+
+[ext_resource type="Script" uid="uid://djk8up2xcpfw5" path="res://tests/clothcombination/cloth_combination.gd" id="1_btkco"]
+[ext_resource type="PackedScene" uid="uid://d1ty658lc6s7s" path="res://tests/clothcombination/jacket_dummy.tscn" id="2_btkco"]
+[ext_resource type="PackedScene" uid="uid://cn2hod4fn7pvo" path="res://tests/clothcombination/open_jacket_dummy.tscn" id="4_7xieg"]
+[ext_resource type="PackedScene" uid="uid://bsus71qyj6cku" path="res://tests/clothcombination/t_shirt_dummy.tscn" id="5_3rct5"]
+[ext_resource type="PackedScene" uid="uid://xpg3p150iy82" path="res://tests/clothcombination/bra_dummy.tscn" id="6_dahb5"]
+
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("all_pieces", "pieces")]
+script = ExtResource("1_btkco")
+all_pieces = [NodePath("jacket dummy"), NodePath("open jacket dummy"), NodePath("T-shirt dummy"), NodePath("bra dummy")]
+pieces = [NodePath("open jacket dummy"), NodePath("T-shirt dummy")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.1215913, -0.23819445, 0.96357614, -0.029820686, 0.9712175, 0.23632038, -0.9921322, 1.876955e-09, -0.12519471, 11.626978, 2.7625103, 0.18204165)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.87916666, 0, 0.47651443, -0.33592767, 0.7092386, 0.61978483, -0.33796242, -0.7049685, 0.6235389, 11.342042, 0, 0)
+
+[node name="jacket dummy" parent="." instance=ExtResource("2_btkco")]
+
+[node name="open jacket dummy" parent="." instance=ExtResource("4_7xieg")]
+
+[node name="T-shirt dummy" parent="." instance=ExtResource("5_3rct5")]
+
+[node name="bra dummy" parent="." instance=ExtResource("6_dahb5")]

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsus71qyj6cku"]
+
+[ext_resource type="PackedScene" uid="uid://bp03c7084p5fc" path="res://fbx_imports/T-shirt dummy.fbx" id="1_vsbjx"]
+[ext_resource type="Script" uid="uid://cdybq4hxku0fa" path="res://tests/clothcombination/cloth_piece.gd" id="2_f7wn7"]
+[ext_resource type="Script" uid="uid://db1k00cuu3jn" path="res://tests/clothcombination/cloth_part.gd" id="3_syj8t"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vsbjx"]
+albedo_color = Color(0, 1, 1, 1)
+
+[node name="T-shirt dummy" instance=ExtResource("1_vsbjx")]
+script = ExtResource("2_f7wn7")
+
+[node name="MidBody" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_vsbjx")
+script = ExtResource("3_syj8t")
+min_priority = 3
+max_priority = 3
+
+[node name="UpperBody" parent="." index="1"]
+material_override = SubResource("StandardMaterial3D_vsbjx")
+script = ExtResource("3_syj8t")
+min_priority = 3
+max_priority = 3
