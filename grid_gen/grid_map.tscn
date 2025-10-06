@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bma1nxkcps7al"]
+
+[ext_resource type="Script" uid="uid://buman10bgbo6s" path="res://grid_gen/grid_map.gd" id="1_oviu8"]
+
+[node name="GridMap" type="Node3D"]
+script = ExtResource("1_oviu8")

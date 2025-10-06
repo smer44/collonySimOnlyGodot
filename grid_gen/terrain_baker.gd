@@ -19,12 +19,13 @@ func bake_to_cache(path: String):
 	
 	cache.elevations.resize(size_x * size_z)
 	
-	for z in size_z:
-		for x in size_x:
+	for z in range(size_z):
+		for x in range(size_x):
 			var elev = function.get_elevation_at(x, z)
-			cache.elevations[z * size_x + x] =elev
+			cache.elevations[z * size_x + x] = elev
+
 			
-			for y in size_y:
+			for y in range(size_y):
 				var color = function.get_color_at(x, y, z)
 				if color != Color.BLACK:
 					cache.colors[Vector3i(x, y, z)] = color

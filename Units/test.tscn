@@ -1,0 +1,59 @@
+[gd_scene load_steps=11 format=3 uid="uid://5stb6hnnubwp"]
+
+[ext_resource type="PackedScene" uid="uid://bma1nxkcps7al" path="res://grid_gen/grid_map.tscn" id="1_mqr32"]
+[ext_resource type="PackedScene" uid="uid://bokgph2bgltag" path="res://Units/unit.tscn" id="2_adpp0"]
+[ext_resource type="Script" uid="uid://4r6sie4eqfr4" path="res://grid_gen/terrain_cache.gd" id="2_vca2m"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vca2m"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_cc7fi"]
+sky_material = SubResource("ProceduralSkyMaterial_vca2m")
+
+[sub_resource type="Environment" id="Environment_ed87m"]
+background_mode = 2
+sky = SubResource("Sky_cc7fi")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_vca2m"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_adpp0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_adpp0"]
+
+[sub_resource type="Resource" id="Resource_adpp0"]
+script = ExtResource("2_vca2m")
+metadata/_custom_type_script = "uid://4r6sie4eqfr4"
+
+[node name="Test" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ed87m")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4712664, 5.217285)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(24, 0, 0, 0, 1, 0, 0, 0, 24, 0, 0, 0)
+mesh = SubResource("BoxMesh_vca2m")
+skeleton = NodePath("StaticBody3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+physics_material_override = SubResource("PhysicsMaterial_adpp0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.015136719)
+shape = SubResource("BoxShape3D_adpp0")
+
+[node name="GridMap" parent="." instance=ExtResource("1_mqr32")]
+cache = SubResource("Resource_adpp0")
+
+[node name="Unit" parent="GridMap" node_paths=PackedStringArray("grid_map") instance=ExtResource("2_adpp0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11925471, 3.2873232, 0.031049252)
+grid_map = NodePath("..")
