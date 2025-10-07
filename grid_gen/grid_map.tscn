@@ -1,6 +1,32 @@
-[gd_scene load_steps=2 format=3 uid="uid://bma1nxkcps7al"]
+[gd_scene load_steps=8 format=3 uid="uid://bma1nxkcps7al"]
 
 [ext_resource type="Script" uid="uid://buman10bgbo6s" path="res://grid_gen/grid_map.gd" id="1_oviu8"]
+[ext_resource type="Resource" uid="uid://d1w3m1fxdofo4" path="res://baked_terrains/TerrainBakerterrain_ffor_baking_test.tres" id="2_ao13g"]
+[ext_resource type="PackedScene" uid="uid://chxovomx6cl0q" path="res://usual_camera_setup.tscn" id="2_ivi4g"]
+[ext_resource type="Script" uid="uid://gsmbyflfiyb1" path="res://grid_gen/terrain_baker.gd" id="3_5vbwq"]
+[ext_resource type="Resource" uid="uid://d3r7rfq4xxdij" path="res://tests/terrain_baking_test/terrain_ffor_baking_test.tres" id="4_5vbwq"]
+[ext_resource type="Script" uid="uid://x4d6arcpv411" path="res://grid_chunks/array_mesh_grid_display.gd" id="6_evm3u"]
+[ext_resource type="Resource" uid="uid://bglq8u6j8q44j" path="res://tests/terrain_baking_test/coloring_for_baking_test.tres" id="7_q8ue3"]
 
 [node name="GridMap" type="Node3D"]
 script = ExtResource("1_oviu8")
+cache = ExtResource("2_ao13g")
+
+[node name="UsualCameraSetup" parent="." instance=ExtResource("2_ivi4g")]
+
+[node name="Node" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.975371, 0, 0)
+script = ExtResource("3_5vbwq")
+function = ExtResource("4_5vbwq")
+bake = null
+
+[node name="ArrayMeshGridDisplay" type="MeshInstance3D" parent="." node_paths=PackedStringArray("collisionShape3D")]
+script = ExtResource("6_evm3u")
+surface_generator = ExtResource("2_ao13g")
+coloring_generator = ExtResource("7_q8ue3")
+collisionShape3D = NodePath("StaticBody3D/CollisionShape3D")
+metadata/_custom_type_script = "uid://x4d6arcpv411"
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ArrayMeshGridDisplay"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ArrayMeshGridDisplay/StaticBody3D"]

@@ -11,6 +11,7 @@ func covers(other: ClothPart):
 	return min_priority > other.max_priority
 	
 	
+	
 
 func pp():
 	return "ClothPart %s : %s:  %s : %s" % [self.name, self.get_parent().name, min_priority, max_priority]

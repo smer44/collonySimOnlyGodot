@@ -9,7 +9,7 @@
 [node name="ClothCombinationDemoNode3D" type="Node3D" node_paths=PackedStringArray("all_pieces", "pieces")]
 script = ExtResource("1_btkco")
 all_pieces = [NodePath("jacket dummy"), NodePath("open jacket dummy"), NodePath("T-shirt dummy"), NodePath("bra dummy")]
-pieces = [NodePath("open jacket dummy"), NodePath("T-shirt dummy")]
+pieces = [NodePath("T-shirt dummy"), NodePath("open jacket dummy")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-0.1215913, -0.23819445, 0.96357614, -0.029820686, 0.9712175, 0.23632038, -0.9921322, 1.876955e-09, -0.12519471, 11.626978, 2.7625103, 0.18204165)

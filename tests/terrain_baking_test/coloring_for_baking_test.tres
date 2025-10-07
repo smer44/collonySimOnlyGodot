@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Noice3DColoring" load_steps=3 format=3 uid="uid://bglq8u6j8q44j"]
+
+[ext_resource type="Script" uid="uid://nmke0fd5yd5p" path="res://grid_gen/terrain_noice_3d_coloring.gd" id="1_26nmi"]
+[ext_resource type="Resource" uid="uid://d3r7rfq4xxdij" path="res://tests/terrain_baking_test/terrain_ffor_baking_test.tres" id="2_fav15"]
+
+[resource]
+script = ExtResource("1_26nmi")
+terrain_generator = ExtResource("2_fav15")
+metadata/_custom_type_script = "uid://nmke0fd5yd5p"

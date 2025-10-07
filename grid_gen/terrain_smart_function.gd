@@ -1,3 +1,4 @@
+@tool
 extends AbstractTerrainElevationGenerator
 class_name  TerrainSmartFunction
 

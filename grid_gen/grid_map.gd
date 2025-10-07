@@ -11,7 +11,7 @@ func _ready() -> void:
 	for x in range(cache.size_x):
 		var row = []
 		for z in range(cache.size_z):
-			var y = cache.get_elevation(x, z)
+			var y = cache.get_elevation_at(x, z)
 			var cell = {
 				"position": Vector3(x, y, z),
 				"occupied": false

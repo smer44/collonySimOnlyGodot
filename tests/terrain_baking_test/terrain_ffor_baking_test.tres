@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="TerrainSmartFunction" load_steps=2 format=3 uid="uid://d3r7rfq4xxdij"]
+
+[ext_resource type="Script" uid="uid://duu4rvdra5kox" path="res://grid_gen/terrain_smart_function.gd" id="1_1uict"]
+
+[resource]
+script = ExtResource("1_1uict")
+metadata/_custom_type_script = "uid://duu4rvdra5kox"
