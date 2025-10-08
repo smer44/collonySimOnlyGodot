@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://5stb6hnnubwp"]
+[gd_scene load_steps=12 format=3 uid="uid://5stb6hnnubwp"]
 
 [ext_resource type="PackedScene" uid="uid://bma1nxkcps7al" path="res://grid_gen/grid_map.tscn" id="1_mqr32"]
 [ext_resource type="PackedScene" uid="uid://bokgph2bgltag" path="res://Units/unit.tscn" id="2_adpp0"]
 [ext_resource type="Script" uid="uid://4r6sie4eqfr4" path="res://grid_gen/terrain_cache.gd" id="2_vca2m"]
+[ext_resource type="PackedScene" uid="uid://chxovomx6cl0q" path="res://usual_camera_setup.tscn" id="4_vca2m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vca2m"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -36,9 +37,6 @@ environment = SubResource("Environment_ed87m")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4712664, 5.217285)
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(24, 0, 0, 0, 1, 0, 0, 0, 24, 0, 0, 0)
 mesh = SubResource("BoxMesh_vca2m")
@@ -57,3 +55,5 @@ cache = SubResource("Resource_adpp0")
 [node name="Unit" parent="GridMap" node_paths=PackedStringArray("grid_map") instance=ExtResource("2_adpp0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11925471, 3.2873232, 0.031049252)
 grid_map = NodePath("..")
+
+[node name="UsualCameraSetup" parent="." instance=ExtResource("4_vca2m")]

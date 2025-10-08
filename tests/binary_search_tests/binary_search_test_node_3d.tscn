@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2p844u031vw6"]
+
+[ext_resource type="Script" uid="uid://p6m4vreh1aq2" path="res://tests/binary_search_tests/binary_search_test.gd" id="1_42vnm"]
+
+[node name="BinarySearchTestNode3D" type="Node3D"]
+script = ExtResource("1_42vnm")

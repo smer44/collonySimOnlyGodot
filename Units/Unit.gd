@@ -23,8 +23,10 @@ func _ready():
 	enter_state(moving_state)
 
 func _physics_process(delta):
+	print("Unit is at :" , global_position)
 	if state:
 		state.update(self, delta)
+		
 
 func enter_state(new_state):
 	state = new_state

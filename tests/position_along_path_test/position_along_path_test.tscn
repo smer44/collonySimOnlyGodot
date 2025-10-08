@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://lqhtlx0ci5sp"]
+
+[ext_resource type="Script" uid="uid://upbn467d2n0w" path="res://tests/position_along_path_test/position_along_path_test.gd" id="1_uwrx6"]
+[ext_resource type="PackedScene" uid="uid://chxovomx6cl0q" path="res://usual_camera_setup.tscn" id="2_evdm8"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_dc1el"]
+
+[node name="PositionAlongPathTestNode3D" type="Node3D" node_paths=PackedStringArray("moving")]
+script = ExtResource("1_uwrx6")
+moving = NodePath("MeshInstance3D")
+time_factor = 7.0
+points = [Vector3(0, 0, 0), Vector3(0, 0, 10), Vector3(0, 10, 10), Vector3(5, 5, 5)]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PrismMesh_dc1el")
+
+[node name="UsualCameraSetup" parent="." instance=ExtResource("2_evdm8")]

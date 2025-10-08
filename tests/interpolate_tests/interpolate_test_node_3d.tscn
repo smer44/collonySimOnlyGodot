@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d21iqew761oa6"]
+
+[ext_resource type="Script" uid="uid://bboaoflvc7dlo" path="res://tests/interpolate_tests/interpolate_test.gd" id="1_v5j2n"]
+
+[node name="InterpolateTestNode3D" type="Node3D"]
+script = ExtResource("1_v5j2n")
