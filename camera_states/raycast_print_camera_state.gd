@@ -26,5 +26,5 @@ func process(owner : CameraStatefull, delta: float) -> void:
 	var raycast = RayCastCalc.raycast_forward(owner)
 	if raycast:
 		var ipos:= RayCastCalc.to_floor_3d(raycast.position)
-		print(ipos)
+		#print("RaycastPrintCameraState : ", ipos)
 	

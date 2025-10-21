@@ -1,6 +1,13 @@
-class_name GridCheck
+class_name GridIndexingCalc
 extends RefCounted
 
+static func idx(x: int, y: int, width: int) -> int:
+	return x + y * width
+
+static func neighbor_count(x:int, y:int, w:int, h:int) -> int:
+	return int(x > 0) + int(x < w - 1) + int(y > 0) + int(y < h - 1)
+	
+	
 
 static func is_on_boundary(p: Vector2i, a: Vector2i, b: Vector2i) -> bool:
 
@@ -57,22 +64,7 @@ static func get_nbrs_delta(p: Vector2i, bound_a: Vector2i, bound_b: Vector2i, nb
 	return result	
 	
 
-static func is_on_elevation_boundary(grid2d: Array[Array],elevation: int, p: Vector2i,  bound_a: Vector2i, bound_b: Vector2i) -> bool:
-	var elevation_at_p :int= grid2d[p.x][p.y]
-	if elevation_at_p != elevation:
-		return false
-	
-	var inside_nbrs := get_nbrs(p, bound_a, bound_b, nbrs8)
 
-	if is_on_boundary(p, bound_a, bound_b):
-		return true
-	
-	assert ( inside_nbrs.size()  ==  8)
-	for nbr in inside_nbrs:
-		var nbr_elevation :int =grid2d[nbr.x][nbr.y]
-		if nbr_elevation != elevation:
-			return true 
-	return false
 	
 
 	

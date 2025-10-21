@@ -1,5 +1,5 @@
 extends RefCounted
-class_name GridBorderSelect
+class_name GridBorderCalc
 
 #static func is_on_elevation_boundary(grid2d: Array[Array],elevation: int, p: Vector2i,  bound_a: Vector2i, bound_b: Vector2i) -> bool:
 
@@ -13,13 +13,33 @@ static func first_valid_dir(grid2d: Array[Array],p: Vector2i, last_dir: int,   b
 		var dir_index := posmod(last_dir + dir_offset, 4)	
 		var dir := out_check_order[dir_index]
 		var nbr := p + dir 
-		if GridCheck.is_inside_boundary(nbr,bound_a,bound_b):
+		if GridIndexingCalc.is_inside_boundary(nbr,bound_a,bound_b):
 			var nbr_ele :int = grid2d[nbr.x][nbr.y]
 			if nbr_ele == ele:
 				return dir_index 
 	return no_dir
 				
-			
+
+static func is_on_elevation_boundary(grid2d: Array[Array],elevation: int, p: Vector2i,  bound_a: Vector2i, bound_b: Vector2i) -> bool:
+	##checks if given point in given elevation is at the boundary of this elevation
+	##means there exists neighbour with different elevation, or point 
+	## is at the border of a grid
+	
+	var elevation_at_p :int= grid2d[p.x][p.y]
+	if elevation_at_p != elevation:
+		return false
+	
+	var inside_nbrs := GridIndexingCalc.get_nbrs(p, bound_a, bound_b, GridIndexingCalc.nbrs8)
+
+	if GridIndexingCalc.is_on_boundary(p, bound_a, bound_b):
+		return true
+	
+	assert ( inside_nbrs.size()  ==  8)
+	for nbr in inside_nbrs:
+		var nbr_elevation :int =grid2d[nbr.x][nbr.y]
+		if nbr_elevation != elevation:
+			return true 
+	return false
 			
 		
 
@@ -52,7 +72,7 @@ static func border_along(grid2d: Array[Array],p: Vector2i, last_dir: int,   boun
 				
 			
 			#print("p : ", p , "testing_dir : " , dir)		
-			if GridCheck.is_inside_boundary(nbr,bound_a,bound_b):
+			if GridIndexingCalc.is_inside_boundary(nbr,bound_a,bound_b):
 				var nbr_ele :int = grid2d[nbr.x][nbr.y]
 				if nbr_ele == ele:
 					last_dir = dir_index 	

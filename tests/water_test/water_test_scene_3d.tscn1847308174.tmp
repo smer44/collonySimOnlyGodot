@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://f8t2vjr4tbsu"]
+
+[ext_resource type="Script" uid="uid://cggbvailmat5p" path="res://water_sim/shader_grid_displayer.gd" id="1_d1mfe"]
+[ext_resource type="Shader" uid="uid://m4lupmfnua4r" path="res://tests/water_test/speed_shader.gdshader" id="2_klr85"]
+[ext_resource type="Texture2D" uid="uid://c4bbrgnhsx7pd" path="res://textures/grass.png" id="3_1x1m3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wqwf5"]
+resource_local_to_scene = true
+shader = ExtResource("2_klr85")
+shader_parameter/palette_count = 8.0
+shader_parameter/speed_gain = 8.0
+shader_parameter/copy_colors = true
+
+[node name="ControlWaterSimulator" type="Control" node_paths=PackedStringArray("grid_view")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_d1mfe")
+grid_view = NodePath("TextureRect")
+palette_colors = null
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_wqwf5")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -9.0
+offset_right = 1162.0
+offset_bottom = 647.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_1x1m3")
+expand_mode = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(580, 321)

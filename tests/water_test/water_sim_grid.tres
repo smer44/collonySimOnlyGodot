@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GridSim" load_steps=2 format=3 uid="uid://u34qmxi0hple"]
+
+[ext_resource type="Script" uid="uid://x8w8wtf4mbpv" path="res://water_sim/water_sim_base.gd" id="1_sej5l"]
+
+[resource]
+script = ExtResource("1_sej5l")
+grid_width = 40
+grid_height = 40
+metadata/_custom_type_script = "uid://x8w8wtf4mbpv"

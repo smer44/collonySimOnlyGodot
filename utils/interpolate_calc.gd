@@ -23,7 +23,7 @@ static func accumulate_distance(points: Array , is_loop: bool = false) -> Packed
 
 	
 static func position_at_time(points: Array, acc:PackedFloat32Array, t: float, is_loop: bool = false):
-	
+	#todo - since access is sequential, no need bsearch - just count from previous value in array
 	var loop_time = acc[-1]
 	if is_loop and t > loop_time:
 		t = fmod (t,loop_time)

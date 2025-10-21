@@ -11,6 +11,10 @@ func enter(owner : Person):
 		mat = StandardMaterial3D.new()
 	mat.albedo_color = self.color
 	owner.get_child(0).material_override = mat
+	subclass_enter(owner)
+	
+func subclass_enter(owner : Person):
+	pass
 
 func process (owner : Person, delta: float):
 	pass

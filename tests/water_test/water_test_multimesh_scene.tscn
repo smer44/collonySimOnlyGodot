@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://c57i6ed5yfpjh"]
+
+[ext_resource type="Script" uid="uid://raj2hx3nyueh" path="res://water_sim/multi_mesh_grid_displayer.gd" id="1_ernwk"]
+[ext_resource type="PackedScene" uid="uid://chxovomx6cl0q" path="res://usual_camera_setup.tscn" id="2_tp6fe"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tp6fe"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tp6fe"]
+material = SubResource("StandardMaterial3D_tp6fe")
+
+[sub_resource type="BoxMesh" id="BoxMesh_eqqxh"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MultiMeshGridDisplayerNode3d" type="Node3D" parent="."]
+script = ExtResource("1_ernwk")
+mesh = SubResource("BoxMesh_tp6fe")
+ground_mesh = SubResource("BoxMesh_eqqxh")
+height_scale = 5.0
+start_size_x = 80
+start_size_y = 80
+
+[node name="UsualCameraSetup" parent="." instance=ExtResource("2_tp6fe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.412959, 1.2546148)

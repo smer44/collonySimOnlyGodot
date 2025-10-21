@@ -67,6 +67,17 @@ func populate(grid: Array[Array], scale: Vector2):
 			var value:=get_at(p,scale)
 			row[y] = value 
 	
+func populate_packed(grid: PackedFloat32Array, w:int, h:int, scale: Vector2):
+	if grid.is_empty():
+		return	
+	var i :=0
+	for y in h:
+		for x in w:			
+			var p:= Vector2(x,y)
+			var value:=get_at(p,scale)
+			grid[i] = value 
+			i+=1
+
 			
 	
 	

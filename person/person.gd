@@ -8,6 +8,7 @@ var state : AbstractPersonState
 var idleState := IdlePersonState.new()
 var satisfyNeedState := SatisfyNeedState.new()
 var movingState := MovingPersonState.new()
+var movingPathState := MovingAlongPathState.new()
 
 
 
@@ -21,7 +22,7 @@ func _process(delta: float) -> void:
 		n.process(delta)	
 		
 	state.process(self, delta)
-	#debug_print_needs()
+	debug_print_needs()
 	
 
 func max_need() -> Need:
@@ -38,7 +39,7 @@ func debug_print_needs() -> void:
 	print("Needs:")
 	for n in needs:
 		print(n.pp())
-	#print("State:" , state.pp())
+	print("State:" , state.pp())
 
 
 func set_state(new_state :AbstractPersonState):
