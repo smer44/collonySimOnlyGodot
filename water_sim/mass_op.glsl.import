@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://docctu6lrmw1r"
+path="res://.godot/imported/mass_op.glsl-9a7b53a11f65cd42e8ee73f343de43f8.res"
+
+[deps]
+
+source_file="res://water_sim/mass_op.glsl"
+dest_files=["res://.godot/imported/mass_op.glsl-9a7b53a11f65cd42e8ee73f343de43f8.res"]
+
+[params]
+

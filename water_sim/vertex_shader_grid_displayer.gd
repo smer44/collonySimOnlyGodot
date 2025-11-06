@@ -38,46 +38,51 @@ func _ready() -> void:
 	else:
 		_build_instances_and_standart_materials()  
 	
+
+static func mesh_instance_child(parent: Node, input_mesh : Mesh, mat: Material ) -> MeshInstance3D:
+	var meshInstance := MeshInstance3D.new()
+	meshInstance.mesh = input_mesh
+	parent.add_child(meshInstance)	
+	meshInstance.set_surface_override_material(0, mat)	
+	return meshInstance
+	
+
 	
 	
 func _build_instances_and_shader_materials() -> void:
-	ground_instance = MeshInstance3D.new()
-	ground_instance.mesh = grid_mesh
-	add_child(ground_instance)	
 	ground_mat = ShaderMaterial.new()
 	ground_mat.shader = _make_ground_shader()
-	ground_instance.set_surface_override_material(0, ground_mat)	
-	water_instance = MeshInstance3D.new()
-	water_instance.mesh = grid_mesh
-	add_child(water_instance)
-
-
+	
+	ground_instance = mesh_instance_child(self, grid_mesh,ground_mat)
+	
+	
 	water_mat = ShaderMaterial.new()
 	water_mat.shader = _make_water_shader()
-	water_instance.set_surface_override_material(0, water_mat)
+	
+	water_instance = mesh_instance_child(self, grid_mesh,water_mat)
+	
 	
 func _build_instances_and_standart_materials() -> void:
 	# Ground
-	ground_instance = MeshInstance3D.new()
-	ground_instance.mesh = grid_mesh
-	add_child(ground_instance)
+
 
 	var ground_mat := StandardMaterial3D.new()
 	ground_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	ground_mat.albedo_color = Color(0.6, 0.6, 0.6)
-	ground_instance.set_surface_override_material(0, ground_mat)
+	
+	ground_instance = mesh_instance_child(self, grid_mesh,ground_mat)
 
 	# Water (second plane)
-	water_instance = MeshInstance3D.new()
-	water_instance.mesh = grid_mesh
-	add_child(water_instance)
-	water_instance.transform.origin.y = 0.001  # tiny offset to avoid z-fighting
+
 
 	var water_mat := StandardMaterial3D.new()
 	water_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	water_mat.albedo_color = Color(0.2, 0.4, 0.8, 0.6)  # semi-transparent
 	water_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	water_instance.set_surface_override_material(0, water_mat)	
+	
+	water_instance = mesh_instance_child(self, grid_mesh,water_mat)
+	water_instance.transform.origin.y = 0.001  # tiny offset to avoid z-fighting
 
 
 func _physics_process(_delta: float) -> void:
@@ -141,15 +146,6 @@ ALPHA = 0.6;
 }
 """
 	return s
-	
-func _ensure_images_and_textures(surface_image :Image, surface_tex :ImageTexture,mass_image: Image,  mass_tex : ImageTexture ) -> void:
-# Create images/textures on first use or when the grid size changes
-	if surface_image == null or surface_image.get_width() != sim.grid_width or surface_image.get_height() != sim.grid_height:
-		surface_image = Image.create(sim.grid_width, sim.grid_height, false, Image.FORMAT_RF)
-		surface_tex = ImageTexture.create_from_image(surface_image)
-	if mass_image == null or mass_image.get_width() != sim.grid_width or mass_image.get_height() != sim.grid_height:
-		mass_image = Image.create(sim.grid_width, sim.grid_height, false, Image.FORMAT_RF)
-		mass_tex = ImageTexture.create_from_image(mass_image)	
 
 static func _ensure_texture_from_image(surface_image :Image, surface_tex :ImageTexture, w : int , h : int )-> Array:
 	if surface_image == null or surface_image.get_width() != w or surface_image.get_height() != h:	
@@ -167,21 +163,18 @@ func _update_textures( ) -> void:
 	mass_image = image_and_tex[0]
 	mass_tex = image_and_tex [1]	
 	
-	
-	# Write floats into the R channel of both images
-	#surface_image.lock()
-	#mass_image.lock()	
 	var i := 0
 	for gy in range(sim.grid_height):
 		for gx in range(sim.grid_width):	
 			surface_image.set_pixel(gx, gy, Color(sim.surface[i], 0, 0, 1))
 			mass_image.set_pixel(gx, gy, Color(sim.mass[i], 0, 0, 1))
 			i += 1
-	#surface_image.unlock()
-	#mass_image.unlock()	
-		
-	# Push to GPU
+
 	surface_tex.update(surface_image)
 	mass_tex.update(mass_image)
+	
+
+		
+		
 	
 	

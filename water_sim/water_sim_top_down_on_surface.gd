@@ -56,6 +56,6 @@ func simulation_step():
 	mass = temp_mass 
 	temp_mass = tmp
 	WaterSimCalc.update_speed_for_surface(mass,surface, speeds_x,speeds_y,grid_width,grid_height,dt_speed)
-	var total_mass = GridVectorMath.sum_of_all(mass)
+	#var total_mass = GridVectorMath.sum_of_all(mass)
 	#print("total_mass:" , total_mass)	
 	

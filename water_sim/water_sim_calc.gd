@@ -174,9 +174,7 @@ static func move_mass_momentum(mass: PackedFloat32Array,temp_mass : PackedFloat3
 static func move_mass_between_cells(mass: PackedFloat32Array,temp_mass : PackedFloat32Array,speeds: PackedFloat32Array, i:int, j:int,i_speed: int, dt_mass: float, clamp_factor : float):
 	var s := speeds[i_speed]			
 	var m := mass[i]  if s>= 0.0 else mass[j]
-	#var m :=  0.5 *(mass[i]  +  mass[j] )
 	var koef :=s * dt_mass 
-	#koef = clampf(s * dt_mass , -clamp_factor , clamp_factor)
 	var amount := m * koef
 	temp_mass[i] -= amount
 	temp_mass[j] += amount

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccshegp2kw8mj"]
+
+[ext_resource type="Script" uid="uid://cx5tqdoo73441" path="res://water_sim/compute_shader_you_tube_tutorial.gd" id="1_0i08n"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Node3D" type="Node3D" parent="."]
+script = ExtResource("1_0i08n")
