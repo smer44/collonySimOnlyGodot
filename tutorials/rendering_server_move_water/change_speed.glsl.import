@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://sfyp6kjjj5eh"
+path="res://.godot/imported/change_speed.glsl-1276b700558511f19335fcea576d78c7.res"
+
+[deps]
+
+source_file="res://tutorials/rendering_server_move_water/change_speed.glsl"
+dest_files=["res://.godot/imported/change_speed.glsl-1276b700558511f19335fcea576d78c7.res"]
+
+[params]
+

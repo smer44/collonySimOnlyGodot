@@ -22,22 +22,18 @@ var water_image: Image
 var water_mesh: MeshInstance3D 
 var sim = WaterSimTopDownOnSurace.new(sim_size.x, sim_size.y)
 
-static func grid_2d_to_image(grid: PackedFloat32Array , image :Image, w:int , h: int)-> void:
-	var i := 0
-	for gy in range(h):
-		for gx in range(w):
-			image.set_pixel(gx, gy, Color(grid[i], 0, 0, 1))
-			i+=1
+
 			
 			
 func init_surface_tex():
 	surface_image = Image.create(sim_size.x, sim_size.y, false, Image.FORMAT_RF)	
-	grid_2d_to_image(sim.surface,surface_image, sim_size.x, sim_size.y)
+
+	ImageTextureUtils.array_to_image(sim.surface,surface_image, sim_size.x, sim_size.y)
 	#create texture with filled image, means after grid_2d_to_image:
 	surface_tex = ImageTexture.create_from_image(surface_image)
 	
 	water_image = Image.create(sim_size.x, sim_size.y, false, Image.FORMAT_RF)	
-	grid_2d_to_image(sim.mass,water_image, sim_size.x, sim_size.y)
+	ImageTextureUtils.array_to_image(sim.mass,water_image, sim_size.x, sim_size.y)
 	water_tex = ImageTexture.create_from_image(water_image)
 	
 	
@@ -45,7 +41,7 @@ func init_surface_tex():
 	
 	
 func init_mesh_instance():
-	var arrays := ArrayMeshBuilder._build_grid_plane(sim_size.x, sim_size.y,cell_step,cell_step)
+	var arrays := ArrayMeshBuilder.build_grid_plane(sim_size.x, sim_size.y,cell_step,cell_step)
 	var grid_mesh := ArrayMesh.new()
 	grid_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	

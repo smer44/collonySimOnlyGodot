@@ -12,7 +12,5 @@ func precalc():
 
 func get_elevation_at(x: int, z: int) -> float:
 	var pos:= z * size_x + x
-	if pos < 0 or pos > elevations.size():
-		return 0.0
 	return 	elevations[pos]
 	

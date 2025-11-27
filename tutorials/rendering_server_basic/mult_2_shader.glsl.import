@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://chxkxsd4w1h03"
+path="res://.godot/imported/mult_2_shader.glsl-65190e1652be420924bad31effd8723b.res"
+
+[deps]
+
+source_file="res://tutorials/rendering_server_basic/mult_2_shader.glsl"
+dest_files=["res://.godot/imported/mult_2_shader.glsl-65190e1652be420924bad31effd8723b.res"]
+
+[params]
+

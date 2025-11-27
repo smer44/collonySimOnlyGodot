@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://r0mudydv0vbe"]
+
+[ext_resource type="Script" uid="uid://bfyicw2quxiix" path="res://tutorials/rendering_server_move_water/rendering_server_moving_water.gd" id="1_ynpi5"]
+[ext_resource type="PackedScene" uid="uid://chxovomx6cl0q" path="res://usual_camera_setup.tscn" id="2_xvhpn"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="SimNode3D" type="Node3D" parent="."]
+script = ExtResource("1_ynpi5")
+
+[node name="UsualCameraSetup" parent="." instance=ExtResource("2_xvhpn")]

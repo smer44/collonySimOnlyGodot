@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcmpv8ljayoql"]
+
+[ext_resource type="Script" uid="uid://c4p6ty380h7jl" path="res://water_sim/water_shader_only_display.gd" id="1_r3sm6"]
+[ext_resource type="PackedScene" uid="uid://chxovomx6cl0q" path="res://usual_camera_setup.tscn" id="2_3u4pm"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DisplayerNode3D" type="Node3D" parent="."]
+script = ExtResource("1_r3sm6")
+
+[node name="UsualCameraSetup" parent="." instance=ExtResource("2_3u4pm")]

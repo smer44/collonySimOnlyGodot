@@ -39,17 +39,15 @@ func _init_arrays():
 	GridVectorMath.fill_all(speeds_y,speeds_y_size, 0)
 	GridVectorMath.fill_rect(mass,grid_width, grid_height,grid_width/2, 0,grid_width/5,grid_height/10, 5.0)
 	
-	
 	var do_noice :=true
 	if do_noice:
 		var noise :=SimpleHashNoise2D.new(13)
-		noise.populate_packed(surface,grid_width,grid_height,Vector2.ONE*0.1)
+		noise.populate_packed(surface,grid_width,grid_height,Vector2.ONE*5.1)
 		#GridVectorMath.mult_with_scalar(surface,3)
 
 	GridVectorMath.add_x_add_y(surface,grid_width,grid_height, .1)
 	GridVectorMath.fill_rect(surface,grid_width, grid_height,grid_width/4, grid_height/4,3,3, (grid_width/4+grid_height/4) * 0.1 + 1.0)
  
-	
 func simulation_step():
 	WaterSimCalc.move_mass_on_surface(mass,temp_mass,speeds_x,speeds_y,grid_width,grid_height,dt_mass)
 	var tmp :=mass

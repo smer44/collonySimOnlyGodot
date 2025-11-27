@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://dgw08jjvl5sig"
+path="res://.godot/imported/simple_hash_noise.glsl-bf68b96228248282ef60f670f1192e52.res"
+
+[deps]
+
+source_file="res://tutorials/rendering_server_move_water/simple_hash_noise.glsl"
+dest_files=["res://.godot/imported/simple_hash_noise.glsl-bf68b96228248282ef60f670f1192e52.res"]
+
+[params]
+

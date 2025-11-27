@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://7q61n3v440cg"]
+
+[ext_resource type="Script" uid="uid://0jidi4culj7x" path="res://tutorials/rendering_server_basic/gpt_rendering_server_tutorial.gd" id="1_553mf"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_553mf")

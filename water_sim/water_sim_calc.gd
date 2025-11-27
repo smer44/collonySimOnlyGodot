@@ -336,14 +336,6 @@ static func grid_velocity_from_mouse_click(
 
 		#speeds_x[k] = sx
 		#speeds_y[k] = sy
-
-
-
-	
-		
-		
-
-		
 static func calc_cell_size_invert(grid_width: int, grid_height: int) -> Vector2:
 	var win_size: Vector2i = DisplayServer.window_get_size()
 	return Vector2(float(grid_width) / win_size.x, float(grid_height) / win_size.y )

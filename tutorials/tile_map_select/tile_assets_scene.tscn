@@ -1,0 +1,57 @@
+[gd_scene load_steps=14 format=3 uid="uid://t42outdu4v0c"]
+
+[ext_resource type="Texture2D" uid="uid://b7krdgwvw0no2" path="res://tutorials/tile_map_select/tile_assets/bed_big_bottom_left.png" id="1_yeaqd"]
+[ext_resource type="Texture2D" uid="uid://dswxkll1nhl7p" path="res://tutorials/tile_map_select/tile_assets/bed_big_bottom_right.png" id="2_im5rc"]
+[ext_resource type="Texture2D" uid="uid://dbuu54jiiyr1i" path="res://tutorials/tile_map_select/tile_assets/bed_big_top_left.png" id="3_jfvqa"]
+[ext_resource type="Texture2D" uid="uid://de4vu451213xg" path="res://tutorials/tile_map_select/tile_assets/bed_big_top_right.png" id="4_uwnmw"]
+[ext_resource type="Texture2D" uid="uid://b8iokqf8ces26" path="res://tutorials/tile_map_select/tile_assets/bed_single_bottom.png" id="5_qgrtr"]
+[ext_resource type="Texture2D" uid="uid://cy4bxe8h37t4m" path="res://tutorials/tile_map_select/tile_assets/bed_single_top.png" id="6_rap8j"]
+[ext_resource type="Texture2D" uid="uid://y44k2rtf74uy" path="res://tutorials/tile_map_select/tile_assets/chair.png" id="7_2ua4j"]
+[ext_resource type="Texture2D" uid="uid://cg54ocm13hj8c" path="res://tutorials/tile_map_select/tile_assets/empty.png" id="8_fcar7"]
+[ext_resource type="Texture2D" uid="uid://bbkugmkr0vjhb" path="res://tutorials/tile_map_select/tile_assets/selected.png" id="9_t7v5d"]
+[ext_resource type="Texture2D" uid="uid://cv7t4sk10e7es" path="res://tutorials/tile_map_select/tile_assets/table_left.png" id="10_mwun7"]
+[ext_resource type="Texture2D" uid="uid://b7d7nkacdt4a3" path="res://tutorials/tile_map_select/tile_assets/table_right.png" id="11_t3cet"]
+[ext_resource type="Texture2D" uid="uid://bibwuirq6lp0k" path="res://tutorials/tile_map_select/tile_assets/wall_horizontal.png" id="12_5aa8j"]
+[ext_resource type="Texture2D" uid="uid://bax4ppb0a5m4k" path="res://tutorials/tile_map_select/tile_assets/wall_vertical.png" id="13_e4swa"]
+
+[node name="TilesNode2D" type="Node2D"]
+
+[node name="BedBigBottomLeft" type="Sprite2D" parent="."]
+texture = ExtResource("1_yeaqd")
+
+[node name="BedBigBottomRight" type="Sprite2D" parent="."]
+texture = ExtResource("2_im5rc")
+
+[node name="BedBigTopLeft" type="Sprite2D" parent="."]
+texture = ExtResource("3_jfvqa")
+
+[node name="BedBigTopRight" type="Sprite2D" parent="."]
+texture = ExtResource("4_uwnmw")
+
+[node name="BetSingleBottom" type="Sprite2D" parent="."]
+texture = ExtResource("5_qgrtr")
+
+[node name="BedSingleTop" type="Sprite2D" parent="."]
+texture = ExtResource("6_rap8j")
+
+[node name="Chair" type="Sprite2D" parent="."]
+texture = ExtResource("7_2ua4j")
+
+[node name="Empty" type="Sprite2D" parent="."]
+texture = ExtResource("8_fcar7")
+
+[node name="Selected" type="Sprite2D" parent="."]
+texture = ExtResource("9_t7v5d")
+
+[node name="TableLeft" type="Sprite2D" parent="."]
+texture = ExtResource("10_mwun7")
+
+[node name="TableRight" type="Sprite2D" parent="."]
+texture = ExtResource("11_t3cet")
+
+[node name="WallHorizontal" type="Sprite2D" parent="."]
+texture = ExtResource("12_5aa8j")
+
+[node name="WallVertical" type="Sprite2D" parent="."]
+rotation = 1.5707964
+texture = ExtResource("13_e4swa")

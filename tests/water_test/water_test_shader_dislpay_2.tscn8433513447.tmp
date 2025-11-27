@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhnnynpi4urkm"]
+
+[ext_resource type="Script" uid="uid://cysib3001yww2" path="res://water_sim/vertex_shader_grid_displayer.gd" id="1_o8lex"]
+[ext_resource type="PackedScene" uid="uid://chxovomx6cl0q" path="res://usual_camera_setup.tscn" id="2_w4icq"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Node3D" type="Node3D" parent="."]
+script = ExtResource("1_o8lex")
+cell_step = null
+height_scale = null
+start_size_x = null
+start_size_y = null
+auto_run = null
+z_bias_water = null
+use_shaders = null
+
+[node name="UsualCameraSetup" parent="." instance=ExtResource("2_w4icq")]

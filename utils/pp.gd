@@ -45,3 +45,19 @@ static func pp_dict_of_lists(d: Dictionary, indent: int = 0) -> String:
 
 	OUT += IND + "}"
 	return OUT
+	
+static func print_array_2d(arr: Array, width: int) -> void:
+	var i := 0  # start index in the flat array
+	var sz := arr.size()
+	var row_id = 0
+	while i < sz:
+		var row_text := "Row: " + str(row_id) + "  "
+		var row_end := i+width
+		row_end = sz if row_end > sz else row_end
+		while i < row_end:
+			row_text += str(arr[i]) + " "
+			i += 1 # move to the next row start index
+			
+		print(row_text)
+		row_id+=1
+		

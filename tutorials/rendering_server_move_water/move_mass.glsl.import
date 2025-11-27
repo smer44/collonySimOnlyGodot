@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://p0pkq6uoeo7i"
+path="res://.godot/imported/move_mass.glsl-ef2ee83f13fa1e9f5e943bad66b75eb6.res"
+
+[deps]
+
+source_file="res://tutorials/rendering_server_move_water/move_mass.glsl"
+dest_files=["res://.godot/imported/move_mass.glsl-ef2ee83f13fa1e9f5e943bad66b75eb6.res"]
+
+[params]
+
