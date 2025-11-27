@@ -57,43 +57,24 @@ func _init_device() -> void:
 
 func _load_compute_shader() -> void:
 	var shader_file: RDShaderFile = load(shader_path)
-	_print_errors(shader_file)
+	RDUtils.print_errors(shader_file)
 	var spirv: RDShaderSPIRV = shader_file.get_spirv()
 	noise_shader = rd.shader_create_from_spirv(spirv)
 	print("SimpleHashNoise2DGPU shader:", noise_shader)
 	noise_pipeline = rd.compute_pipeline_create(noise_shader)
 
+
+
+
 func _create_noise_texture() -> void:
-	var fmt := RDTextureFormat.new()
-	fmt.width = noise_width
-	fmt.height = noise_height
-	fmt.texture_type = RenderingDevice.TEXTURE_TYPE_2D
-	fmt.format = RenderingDevice.DATA_FORMAT_R32_SFLOAT
-	fmt.mipmaps = 1
-	fmt.usage_bits = (
-		RenderingDevice.TEXTURE_USAGE_STORAGE_BIT |
-		RenderingDevice.TEXTURE_USAGE_SAMPLING_BIT |
-		RenderingDevice.TEXTURE_USAGE_CAN_COPY_FROM_BIT |
-		RenderingDevice.TEXTURE_USAGE_CAN_UPDATE_BIT
-	)
-
+	var fmt := RDUtils.new_single_value_rd_texture_format(noise_width , noise_height)
 	var view := RDTextureView.new()
-
-	# Initial contents: zeros (compute shader will overwrite)
-	var zero_floats := PackedFloat32Array()
-	zero_floats.resize(noise_width * noise_height)
-	var zero_bytes := zero_floats.to_byte_array()
+	var zero_bytes := PackedByteArray()
+	zero_bytes.resize(noise_width * noise_height*4)
 
 	out_noise = rd.texture_create(fmt, view, [zero_bytes])
 
 func _create_params_ubo() -> void:
-	# Must match shader's Params block layout:
-	# float width;
-	# float height;
-	# vec2  scale;
-	# float seed;
-	# float amplitude;
-	# float _pad[2];
 	var params_floats := PackedFloat32Array([
 		float(noise_width),
 		float(noise_height),
@@ -101,11 +82,11 @@ func _create_params_ubo() -> void:
 		scale.y,
 		float(seed),
 		amplitude,
-		0.0,
-		0.0
 	])
-	var params_bytes := params_floats.to_byte_array()
-	noise_params_ubo = rd.uniform_buffer_create(params_bytes.size(), params_bytes)
+
+	noise_params_ubo = RDUtils.new_floats_ubo(rd,params_floats)
+
+
 
 func _create_uniform_set() -> void:
 	var u_image := RDUniform.new()
@@ -145,38 +126,3 @@ func update_params(new_scale: Vector2, new_amplitude: float, new_seed: int) -> v
 	seed = new_seed
 	_create_params_ubo()
 	_create_uniform_set()
-
-# ------------------------------------------------------------
-# DEBUG / ERROR PRINTING
-# ------------------------------------------------------------
-
-func _print_errors(shader_file: RDShaderFile) -> void:
-	if shader_file.base_error != "":
-		push_error("Shader base error in %s:\n%s" % [shader_path, shader_file.base_error])
-		return
-
-	var versions := shader_file.get_version_list()
-	if versions.is_empty():
-		push_error("Shader '%s' has no compiled versions (check base_error or stage errors)" % shader_path)
-		return
-
-	for version in versions:
-		var spirv: RDShaderSPIRV = shader_file.get_spirv(version)
-		if spirv == null:
-			push_error("Shader '%s' version '%s' has no SPIR-V (get_spirv() returned null)" % [shader_path, str(version)])
-			continue
-
-		var errors := {
-			"compute":   spirv.compile_error_compute,
-			"vertex":    spirv.compile_error_vertex,
-			"fragment":  spirv.compile_error_fragment,
-			"tess_ctrl": spirv.compile_error_tesselation_control,
-			"tess_eval": spirv.compile_error_tesselation_evaluation,
-		}
-
-		for stage_name in errors.keys():
-			var err: String = errors[stage_name]
-			if err != "":
-				push_error("Shader error in %s (version: %s, stage: %s):\n%s" % [
-					shader_path, version, stage_name, err
-				])

@@ -15,12 +15,73 @@ func _init(grid: AbstractTerrainElevationGenerator):
 	self.grid = grid
 	
 
-func walkable(cell:Vector2i):
+func walkable(cell:Vector2i)-> bool:
 	var ele:= grid.get_elevation_at(cell.x,cell.y)
 	return  abs(ele - ele_need) <= eps
 	
 func set_ele(ele):
 	self.ele_need = ele
+	
+
+func _scan_boundary(start: Vector2i, step: Vector2i, neighbor_offset: Vector2i, length: int, gateways: Array) -> void:
+
+	var in_window := false
+	var window_start := 0
+	var a:= start
+	for i in range(length):
+		var b := a + neighbor_offset
+		var free_pair := walkable(a) and walkable(b)
+		if free_pair:
+			if not in_window:
+				in_window = true
+				window_start = i
+		
+		elif in_window:
+			var mid :int= (window_start + i - 1) / 2
+			gateways.append(start + step * mid)
+			in_window = false
+			
+		a+= step
+	# Handle window that goes to the end
+	if in_window:
+		var mid :int= (window_start + length - 1) / 2
+		gateways.append(start + step * mid)
+
+	
+	
+func find_bottom_right_gateways_for_cluster(cx: int, cy: int , cluster_width: int, cluster_height: int) -> Array:
+	var gateways:= []
+	var origin := Vector2i(cx * cluster_width, cy * cluster_height)
+	
+	# Horizontal boundary: scan along X
+	var start := Vector2i(origin.x, origin.y + cluster_height - 1)  # cell in top cluster
+	var step := Vector2i(1, 0)
+	var neighbor_offset := Vector2i(0, 1)  # moves into bottom cluster
+	var length := cluster_width
+	_scan_boundary(start,step,neighbor_offset,length,gateways)	
+	
+	# Vertical boundary: scan along Y
+	start = Vector2i(origin.x + cluster_width - 1, origin.y)  # cell in left cluster
+	step = Vector2i(0, 1)
+	neighbor_offset = Vector2i(1, 0)  # moves into right cluster
+	length = cluster_height
+	_scan_boundary(start,step,neighbor_offset,length,gateways)
+	return gateways
+	
+func find_all_gateways(overall_width: int, overall_height: int, cluster_width: int, cluster_height: int) -> Array:
+	var clusters_x :int= overall_width / cluster_width
+	var clusters_y :int= overall_height / cluster_height
+
+	var all_gateways: Array = []
+
+	for cy in range(clusters_y-1):
+		for cx in range(clusters_x-1):
+			var gateways_for_cluster := find_bottom_right_gateways_for_cluster(cx, cy, cluster_width, cluster_height)
+			all_gateways.append(gateways_for_cluster)
+
+	return all_gateways
+
+
 	
 	
 func find_all_windows(bounds_block_a: Vector2i, block_bounds_b: Vector2i, bounds_a: Vector2i, bounds_b: Vector2i)-> Array:
@@ -71,13 +132,6 @@ func all_windows_to_all_border_points(all_windows : Array) -> Array:
 			all_points.append(to) 
 		
 	return all_points
-		
-			
-		
-			
-		
-		
-	
 	
 
 func find_next_window(bounds_block_a: Vector2i, bounds_block_end: Vector2i,bounds_a: Vector2i, bounds_b: Vector2i, step: Vector2i, vstep: Vector2i) :
@@ -85,7 +139,7 @@ func find_next_window(bounds_block_a: Vector2i, bounds_block_end: Vector2i,bound
 	#if -step leads outside of the bounds there is no next window for this side:
 	var vnbr := bounds_block_a - vstep
 	#var bounds_block_end := bounds_block_a+block_dim
-	if not GridCheck.is_inside_boundary(vnbr,bounds_a,bounds_b):
+	if not GridIndexingCalc.is_inside_boundary(vnbr,bounds_a,bounds_b):
 		return null
 	var nbr := bounds_block_a
 	

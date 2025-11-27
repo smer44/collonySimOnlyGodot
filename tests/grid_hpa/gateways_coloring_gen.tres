@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="HPADebugGatewayPointsShow" load_steps=3 format=3 uid="uid://bvtjtdhw0jm4b"]
+
+[ext_resource type="Script" uid="uid://d02ldqlgevrg1" path="res://utils_grid/hpa_debug_gateway_points_show.gd" id="1_yv1rt"]
+[ext_resource type="Resource" uid="uid://bpko1xph13v5h" path="res://tests/grid_big_pathfind/terrain_big_gen.tres" id="2_galep"]
+
+[resource]
+script = ExtResource("1_yv1rt")
+terrain = ExtResource("2_galep")
+cluster_size = Vector2i(32, 32)
+grid_size = Vector2i(128, 128)
+metadata/_custom_type_script = "uid://d02ldqlgevrg1"
