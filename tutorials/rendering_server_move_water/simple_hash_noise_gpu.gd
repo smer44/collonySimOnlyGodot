@@ -57,7 +57,7 @@ func _init_device() -> void:
 
 func _load_compute_shader() -> void:
 	var shader_file: RDShaderFile = load(shader_path)
-	RDUtils.print_errors(shader_file)
+	RDUtils.print_errors_for_shader(shader_file)
 	var spirv: RDShaderSPIRV = shader_file.get_spirv()
 	noise_shader = rd.shader_create_from_spirv(spirv)
 	print("SimpleHashNoise2DGPU shader:", noise_shader)

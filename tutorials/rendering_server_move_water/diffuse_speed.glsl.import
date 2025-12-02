@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://bv5dj06smvljq"
+path="res://.godot/imported/diffuse_speed.glsl-9fb570426379f22507498eeec84db66c.res"
+
+[deps]
+
+source_file="res://tutorials/rendering_server_move_water/diffuse_speed.glsl"
+dest_files=["res://.godot/imported/diffuse_speed.glsl-9fb570426379f22507498eeec84db66c.res"]
+
+[params]
+
