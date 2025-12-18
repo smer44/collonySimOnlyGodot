@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bn0757kao5i17"]
 
-[ext_resource type="Script" uid="uid://x4d6arcpv411" path="res://grid_chunks/array_mesh_grid_display.gd" id="1_gxat7"]
+[ext_resource type="Script" uid="uid://x4d6arcpv411" path="res://grid_display_scripts/array_mesh_grid_display.gd" id="1_gxat7"]
 [ext_resource type="Script" uid="uid://jcvuniltb8vq" path="res://utils/wasd_move_mouse_rotate.gd" id="3_4xmbh"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_wqo8f"]

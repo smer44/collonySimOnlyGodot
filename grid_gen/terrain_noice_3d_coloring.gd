@@ -3,7 +3,7 @@ class_name Noice3DColoring
 
 
 @export var seed_3d: int = 4242
-@export var terrain_generator : AbstractTerrainElevationGenerator 
+#@export var terrain_generator : AbstractTerrainElevationGenerator 
 # Noise thresholds in ascending order; values must have len == levels.len + 1
 @export var levels: Array[float] = [0.25, 0.5, 0.75]
 @export var values: Array = [
@@ -25,8 +25,6 @@ func _ready():
 	if not StepChooser.steps_check(levels, values):
 		push_error("Noice3DColoring._ready: values.size must equal levels.size + 1")
 
-func precalc()-> void:
-	terrain_generator.precalc()
 	
 func get_color_at(x:int, y:int, z:int) -> Color:
 	var elevation_y := terrain_generator.get_elevation_at(x,z)

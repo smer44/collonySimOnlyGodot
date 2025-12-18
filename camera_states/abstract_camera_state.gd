@@ -1,7 +1,7 @@
 extends Node
 class_name AbstractCameraState
 
-enum StateType {Stay, Hover, RaycastPrint, StayCursorRaycast, Spawning}
+enum StateType {Stay, Hover, RaycastPrint, StayCursorRaycast, Spawning, Point, ChooseUI, Draw }
 @export var stateType : AbstractCameraState.StateType
 
 func enter(owner : CameraStatefull) -> void:

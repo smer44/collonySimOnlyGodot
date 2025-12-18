@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dui48rcnnl5jk"]
 
-[ext_resource type="Script" uid="uid://x4d6arcpv411" path="res://grid_chunks/array_mesh_grid_display.gd" id="1_4itph"]
+[ext_resource type="Script" uid="uid://x4d6arcpv411" path="res://grid_display_scripts/array_mesh_grid_display.gd" id="1_4itph"]
 [ext_resource type="Script" uid="uid://jcvuniltb8vq" path="res://utils/wasd_move_mouse_rotate.gd" id="2_pxsfw"]
 [ext_resource type="Resource" uid="uid://ux23s5ql5dok" path="res://grid_gen/terrain_smart_function_example.tres" id="2_wqo8f"]
 [ext_resource type="Script" uid="uid://dve4qqxyqkkqd" path="res://grid_chunks/multi_mesh_grid_chunk.gd" id="4_tbcar"]

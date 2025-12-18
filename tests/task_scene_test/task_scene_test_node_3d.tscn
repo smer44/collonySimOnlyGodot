@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://47m0fov5wmc1"]
+
+[ext_resource type="Script" uid="uid://x4d6arcpv411" path="res://grid_display_scripts/array_mesh_grid_display.gd" id="1_fwt2k"]
+[ext_resource type="Resource" uid="uid://bpko1xph13v5h" path="res://res_gen/terrain_big_gen.tres" id="2_auw31"]
+[ext_resource type="PackedScene" uid="uid://chxovomx6cl0q" path="res://usual_camera_setup.tscn" id="2_xjof7"]
+[ext_resource type="Resource" uid="uid://brkwirbt1q75j" path="res://res_gen/default_terrain_coloring.tres" id="3_u5pb2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_auw31"]
+
+[node name="TaskSceneTestNode3D" type="Node3D"]
+
+[node name="ArrayMeshGridDisplayNode3D" type="MeshInstance3D" parent="." node_paths=PackedStringArray("collisionShape3D")]
+script = ExtResource("1_fwt2k")
+surface_generator = ExtResource("2_auw31")
+coloring_generator = ExtResource("3_u5pb2")
+collisionShape3D = NodePath("StaticBody3D/CollisionShape3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ArrayMeshGridDisplayNode3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ArrayMeshGridDisplayNode3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_auw31")
+
+[node name="UsualCameraSetup" parent="." instance=ExtResource("2_xjof7")]

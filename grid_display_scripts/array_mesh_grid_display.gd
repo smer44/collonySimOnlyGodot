@@ -19,7 +19,7 @@ func _ready() -> void:
 	assert(coloring_generator != null, "ArrayMeshGridDisplay: coloring_generator is not set")
 	
 	surface_generator.precalc()
-	coloring_generator.precalc()	
+	coloring_generator.precalc_for(surface_generator)	
 	
 	var  m := ArrayMesh.new()
 	self.material_override = new_mat_with_vertex_color()

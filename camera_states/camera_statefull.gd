@@ -13,10 +13,12 @@ var init_state_type = AbstractCameraState.StateType.Hover
 @export var hide_cursor: bool = true
 @export var shift_speed: float = 4.0
 
+@export var choose_ui_root: Control
 
 func _ready() -> void:
 
 	_update_states_map()
+	print(state_map)
 	state = state_map[init_state_type]
 	state.enter(self)
 	
@@ -24,6 +26,7 @@ func _ready() -> void:
 func _update_states_map():
 	for child in get_children():
 		if child is AbstractCameraState:
+			assert (not child.stateType in state_map , "CameraStatefull: state type enum doubled")
 			state_map[child.stateType] = child
 	
 		
@@ -32,6 +35,12 @@ func _input(event: InputEvent) -> void:
 	state.input(self,event)
 	var newState :AbstractCameraState = null
 	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_ESCAPE:
+			if state.stateType == AbstractCameraState.StateType.ChooseUI:
+				newState = state_map[AbstractCameraState.StateType.Hover]
+			else:
+				newState= state_map[AbstractCameraState.StateType.ChooseUI]
+			
 		if event.keycode == KEY_BACKSPACE:			
 			if state.stateType == AbstractCameraState.StateType.Stay:
 				newState = state_map[AbstractCameraState.StateType.Hover]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://blbr60nri1u0y"]
 
-[ext_resource type="Script" uid="uid://x4d6arcpv411" path="res://grid_chunks/array_mesh_grid_display.gd" id="1_6nmpq"]
+[ext_resource type="Script" uid="uid://x4d6arcpv411" path="res://grid_display_scripts/array_mesh_grid_display.gd" id="1_6nmpq"]
 [ext_resource type="Resource" uid="uid://c7budsaf1g68k" path="res://tests/grid_gen/terrain_display_test_function.tres" id="2_5qlsg"]
 [ext_resource type="Resource" uid="uid://rmh34i8jyg3b" path="res://tests/grid_gen/terrain_astar_test_function.tres" id="2_26nnq"]
 [ext_resource type="PackedScene" uid="uid://chxovomx6cl0q" path="res://usual_camera_setup.tscn" id="3_26nnq"]

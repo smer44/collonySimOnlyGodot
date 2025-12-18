@@ -40,12 +40,8 @@ static func raycast_forward(node : Node3D, exclude: Array = [], ray_length: floa
 	# Cast along this node's +Z in world space
 	var dir: Vector3 = -node.global_transform.basis.z.normalized()
 	var finish: Vector3 = start + dir * ray_length
-
-
 	# Make sure we don't hit ourselves
 	exclude.append(node)
-
-
 	var space_state: PhysicsDirectSpaceState3D = node.get_world_3d().direct_space_state
 	var query := PhysicsRayQueryParameters3D.create(start, finish)
 	query.exclude = exclude
@@ -80,8 +76,21 @@ static func raycast_from_cursor(camera: Camera3D, exclude: Array = [], ray_lengt
 	return result
 	
 	
+static func point_from_cursor_distance(
+		camera: Camera3D,
+		distance: float,
+		clamp_nonnegative: bool = true
+	) -> Vector3:
+	var viewport := camera.get_viewport()
+	var mouse_pos: Vector2 = viewport.get_mouse_position()
 
-	
+	var origin: Vector3 = camera.project_ray_origin(mouse_pos)
+	var dir: Vector3 = camera.project_ray_normal(mouse_pos).normalized()
+
+	if clamp_nonnegative and distance < 0.0:
+		distance = 0.0
+
+	return origin + dir * distance
 	
 	
 	

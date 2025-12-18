@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://chxovomx6cl0q"]
+[gd_scene load_steps=17 format=3 uid="uid://chxovomx6cl0q"]
 
 [ext_resource type="Script" uid="uid://cffy1afot41f1" path="res://camera_states/camera_statefull.gd" id="1_rw75i"]
 [ext_resource type="Script" uid="uid://ceyxoiygmljtj" path="res://debug_help/on_click_spawner.gd" id="2_dnwcs"]
@@ -8,6 +8,13 @@
 [ext_resource type="Script" uid="uid://bipcj47vv23so" path="res://camera_states/raycast_print_camera_state.gd" id="6_djr38"]
 [ext_resource type="Script" uid="uid://bcylyxulc5l1m" path="res://debug_help/cross_in_center_ui.gd" id="7_jk4bl"]
 [ext_resource type="Script" uid="uid://d3j3aseoye3n1" path="res://camera_states/stay_cursor_raycast_camera_state.gd" id="7_uk28j"]
+[ext_resource type="Script" uid="uid://cey6l4ia5055v" path="res://camera_states/choose_ui_camera_state.gd" id="8_wypel"]
+[ext_resource type="Script" uid="uid://vd68tioj8tug" path="res://camera_states/spawn_packed_scene_camera_state.gd" id="9_jwovm"]
+[ext_resource type="PackedScene" uid="uid://bsa6o5af57ogj" path="res://meshes/human_dummy_3d.tscn" id="10_rjsml"]
+[ext_resource type="Script" uid="uid://cj4ryi14ty5me" path="res://camera_states/point_from_cursor_distance_camera_state.gd" id="11_7dwh6"]
+[ext_resource type="Script" uid="uid://5sex3abs2smb" path="res://camera_states/draw_from_cursor_camera_state.gd" id="12_j0yoy"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_j0yoy"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_5qlsg"]
 
@@ -15,9 +22,10 @@
 
 [node name="UsualCameraSetup" type="Node3D"]
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("choose_ui_root")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2469683, 3.3505445)
 script = ExtResource("1_rw75i")
+choose_ui_root = NodePath("CanvasLayer/ChooseUIRootControl")
 
 [node name="SpawnPivotNode3d" type="Node3D" parent="Camera3D"]
 script = ExtResource("2_dnwcs")
@@ -41,6 +49,54 @@ metadata/_custom_type_script = "uid://bqepha1m5hfvc"
 script = ExtResource("7_uk28j")
 stateType = 3
 metadata/_custom_type_script = "uid://d3j3aseoye3n1"
+
+[node name="ChooseUIState" type="Node" parent="Camera3D" node_paths=PackedStringArray("choose_ui_vbox")]
+script = ExtResource("8_wypel")
+choose_ui_vbox = NodePath("../CanvasLayer/ChooseUIRootControl/VBoxContainer")
+stateType = 6
+metadata/_custom_type_script = "uid://cey6l4ia5055v"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera3D"]
+
+[node name="ChooseUIRootControl" type="Control" parent="Camera3D/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Camera3D/CanvasLayer/ChooseUIRootControl"]
+custom_minimum_size = Vector2(30, 30)
+layout_direction = 2
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+alignment = 1
+
+[node name="SpawningCameraState" type="Node" parent="Camera3D"]
+script = ExtResource("9_jwovm")
+scene_to_spawn = ExtResource("10_rjsml")
+stateType = 4
+metadata/_custom_type_script = "uid://vd68tioj8tug"
+
+[node name="PointOnDistanceCameraState" type="Node" parent="Camera3D" node_paths=PackedStringArray("debug_mesh")]
+script = ExtResource("11_7dwh6")
+debug_mesh = NodePath("../../DebugCube")
+stateType = 5
+metadata/_custom_type_script = "uid://cj4ryi14ty5me"
+
+[node name="DrawOnDistanceCameraState" type="Node" parent="Camera3D"]
+script = ExtResource("12_j0yoy")
+debug_mesh = SubResource("BoxMesh_j0yoy")
+stateType = 7
+metadata/_custom_type_script = "uid://5sex3abs2smb"
 
 [node name="DebugCube" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_5qlsg")

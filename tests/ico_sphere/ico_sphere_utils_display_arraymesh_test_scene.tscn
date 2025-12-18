@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://bal7d8f2r62gv"]
+
+[ext_resource type="Script" uid="uid://yjx101m4efnq" path="res://tests/ico_sphere/ico_sphere_utls_display_arraymesh.gd" id="1_lj318"]
+[ext_resource type="PackedScene" uid="uid://chxovomx6cl0q" path="res://usual_camera_setup.tscn" id="2_a7h8c"]
+[ext_resource type="Texture2D" uid="uid://cublqr2li3yvo" path="res://icon.svg" id="2_ybowh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_arxla"]
+albedo_texture = ExtResource("2_ybowh")
+
+[node name="IcoSphereUtilsDisplayArraymeshTestNode3D" type="Node3D"]
+
+[node name="DisplayNode3D" type="Node3D" parent="."]
+script = ExtResource("1_lj318")
+subdiv = 13
+mat = SubResource("StandardMaterial3D_arxla")
+
+[node name="UsualCameraSetup" parent="." instance=ExtResource("2_a7h8c")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.041143287, 0.99915326, 0, -0.99915326, -0.041143287, 0, 0, 0)

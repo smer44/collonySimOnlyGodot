@@ -2,7 +2,7 @@ extends AbstractCameraState
 class_name HoverCameraState 
 
 func enter(owner : CameraStatefull) -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)	
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	pass
 
 

@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://ce8p8xv2jnubu"]
+
+[ext_resource type="Script" uid="uid://bdrsmbajlvsy" path="res://tests/ico_sphere/cube_sphere_display_multimesh.gd" id="1_pipu8"]
+[ext_resource type="PackedScene" uid="uid://chxovomx6cl0q" path="res://usual_camera_setup.tscn" id="2_1b5r4"]
+[ext_resource type="Script" uid="uid://dqt31h5rtac13" path="res://tests/ico_sphere/cube_sphere_display_arraymesh.gd" id="3_1b5r4"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_pipu8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1b5r4"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1kf56"]
+disable_ambient_light = true
+disable_specular_occlusion = true
+albedo_color = Color(0, 0.74509805, 0.12156863, 1)
+metallic_specular = 0.0
+
+[node name="IcoSphereSceneNode3D" type="Node3D"]
+
+[node name="IcoSphereDisplayMultimeshNode3D" type="Node3D" parent="."]
+script = ExtResource("1_pipu8")
+instance_mesh = SubResource("BoxMesh_pipu8")
+instance_material = SubResource("StandardMaterial3D_1b5r4")
+instance_scale = 0.1
+
+[node name="UsualCameraSetup" parent="." instance=ExtResource("2_1b5r4")]
+
+[node name="IcoSphereDisplayArrayMeshNode3D" type="Node3D" parent="."]
+script = ExtResource("3_1b5r4")
+material = SubResource("StandardMaterial3D_1kf56")

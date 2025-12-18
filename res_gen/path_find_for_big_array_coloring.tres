@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="TerrainPathfindColoring" load_steps=4 format=3 uid="uid://bwkmb2cukaeom"]
 
-[ext_resource type="Resource" uid="uid://brkwirbt1q75j" path="res://tests/grid_big_pathfind/default_terrain_coloring.tres" id="1_5kmxy"]
+[ext_resource type="Resource" uid="uid://brkwirbt1q75j" path="res://res_gen/default_terrain_coloring.tres" id="1_5kmxy"]
 [ext_resource type="Script" uid="uid://b10mvni88jgvk" path="res://grid_marking_gen/terrain_pathfind_coloring.gd" id="1_q2tkt"]
-[ext_resource type="Resource" uid="uid://bpko1xph13v5h" path="res://tests/grid_big_pathfind/terrain_big_gen.tres" id="2_q2tkt"]
+[ext_resource type="Resource" uid="uid://bpko1xph13v5h" path="res://res_gen/terrain_big_gen.tres" id="2_q2tkt"]
 
 [resource]
 script = ExtResource("1_q2tkt")

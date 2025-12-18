@@ -8,7 +8,8 @@ class_name OnClickPivotSpawner
 # Spawn when left mouse button is pressed
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		spawn()
+		pass
+		#spawn()
 
 
 func spawn():

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://fi41kpbfk3d0"]
+
+[ext_resource type="Script" uid="uid://1ynyfuhr1q7a" path="res://tests/ico_sphere/ico_sphere_index_console_test.gd" id="1_l443o"]
+
+[node name="IcoSphereIndexTestNode3D" type="Node3D"]
+script = ExtResource("1_l443o")

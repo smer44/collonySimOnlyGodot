@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Noice3DColoring" load_steps=2 format=3 uid="uid://brkwirbt1q75j"]
+
+[ext_resource type="Script" uid="uid://nmke0fd5yd5p" path="res://grid_gen/terrain_noice_3d_coloring.gd" id="1_byqgv"]
+
+[resource]
+script = ExtResource("1_byqgv")
+seed_3d = 3606
+metadata/_custom_type_script = "uid://nmke0fd5yd5p"

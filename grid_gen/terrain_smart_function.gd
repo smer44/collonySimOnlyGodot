@@ -8,7 +8,7 @@ class_name  TerrainSmartFunction
 
 
 # Domain scaling (bigger => lower frequency)
-@export var elevation_scale: Vector2 = Vector2(24.0, 24.0)  # XZ noise scale
+@export var xz_noise_scale: Vector2 = Vector2(24.0, 24.0)
 
 @export var dims: Vector3i = Vector3i(12, 12, 12)  # XYZ noise scale for ground types
 @export var discrete_y : bool = true
@@ -33,7 +33,7 @@ func precalc()-> void:
 	
 func get_elevation_at(x:int, z:int) -> float:
 	var p_xz := Vector2(x, z )
-	var elevation_value := noise2d.get_at(p_xz, elevation_scale)
+	var elevation_value := noise2d.get_at(p_xz, xz_noise_scale)
 	
 
 	var elevation_level := elevation_value * dims.y - 0.001 * dims.y
@@ -47,7 +47,7 @@ func get_elevation_at(x:int, z:int) -> float:
 	
 func get_elevation_basic_at(x:int, z:int) -> float:
 	var p_xz := Vector2(x, z )
-	var elevation_value := noise2d.get_at(p_xz, elevation_scale)
+	var elevation_value := noise2d.get_at(p_xz, xz_noise_scale)
 	var elevation_level := elevation_value * dims.y
 	if discrete_y:
 		return round(elevation_level)

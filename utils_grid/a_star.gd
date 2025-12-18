@@ -46,8 +46,8 @@ func find(start: Vector2i, goal: Vector2i,  bound_a: Vector2i, bound_b: Vector2i
 	ele_need = grid.get_elevation_at(p.x,p.y)
 	
 	var ret := []
-	assert (GridCheck.is_inside_boundary(start,bound_a,bound_b), "AStarMy: start %s is outside of boundary %s : %s" % [start, bound_a, bound_b])
-	assert (GridCheck.is_inside_boundary(goal,bound_a,bound_b), "AStarMy: goal %s is outside of boundary %s : %s" % [goal, bound_a, bound_b])
+	assert (GridIndexingCalc.is_inside_boundary(start,bound_a,bound_b), "AStarMy: start %s is outside of boundary %s : %s" % [start, bound_a, bound_b])
+	assert (GridIndexingCalc.is_inside_boundary(goal,bound_a,bound_b), "AStarMy: goal %s is outside of boundary %s : %s" % [goal, bound_a, bound_b])
 	
 	if not  (walkable(p)  or walkable(goal)):
 		print("AStarMy: short fail")
@@ -87,7 +87,7 @@ func find(start: Vector2i, goal: Vector2i,  bound_a: Vector2i, bound_b: Vector2i
 			continue		
 		closed[p] = true
 		
-		for dn in GridCheck.get_nbrs_delta(p,bound_a,bound_b,GridCheck.nbrs8):
+		for dn in GridIndexingCalc.get_nbrs_delta(p,bound_a,bound_b,GridIndexingCalc.nbrs8):
 			var n := p + dn
 			#var cell = grid[n.x][n.y]
 			if not walkable(n) or closed.has(n):
@@ -100,6 +100,6 @@ func find(start: Vector2i, goal: Vector2i,  bound_a: Vector2i, bound_b: Vector2i
 				var fn := tentative_g + heuristic(n, goal) # swap heuristic if desired
 				f[n] = fn
 				heap.push(fn, n)
-	print("AStarMy: long fail")
+	#print("AStarMy.find: long fail")
 	return []
 	
