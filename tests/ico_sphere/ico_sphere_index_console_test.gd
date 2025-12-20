@@ -37,24 +37,24 @@ func _ready() -> void:
 	for plane_nr in range(5):
 		var pts := uvs_down(subdiv)
 		for p in pts:
-			var ij :=IcoSphereIndexUtils.plane_04(plane_nr,p.x,p.y)
+			var ij :=IcoSphereUtils.plane_04(plane_nr,p.x,p.y)
 			print(plane_nr , p , " : ", ij  )
 	for plane_nr in range(5, 10):
 		var pts := uvs_down(subdiv)
 		for p in pts:
-			var ij :=IcoSphereIndexUtils.plane_510(plane_nr,p.x,p.y,subdiv)
+			var ij :=IcoSphereUtils.plane_510(plane_nr,p.x,p.y,subdiv)
 			#print(plane_nr , p , " : ", ij  )
 		
 	for plane_nr in range(10, 15):
 		var pts := uvs_up(subdiv)
 		for p in pts:
-			var ij :=IcoSphereIndexUtils.plane_1014(plane_nr,p.x,p.y,subdiv)
+			var ij :=IcoSphereUtils.plane_1014(plane_nr,p.x,p.y,subdiv)
 			#print(plane_nr , p , " : ", ij  )
 			
 	for plane_nr in range(15,20):
 		var pts := uvs_up(subdiv)
 		for p in pts :
-			var ij :=IcoSphereIndexUtils.plane_1520(plane_nr,p.x,p.y,subdiv)
+			var ij :=IcoSphereUtils.plane_1520(plane_nr,p.x,p.y,subdiv)
 			#print(plane_nr , p , " : ", ij  )
 			
 	

@@ -2,6 +2,8 @@ extends RefCounted
 class_name FiboSphereUtils
 
 
+	
+
 # Triangle indices into the supplied points array (which must match all_points(rows, cols) order).
 # Every 3 consecutive ints form one triangle.
 #TODO - now returns wrong indexes

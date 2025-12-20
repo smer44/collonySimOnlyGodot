@@ -1,20 +1,48 @@
-[gd_scene load_steps=5 format=3 uid="uid://bal7d8f2r62gv"]
+[gd_scene load_steps=10 format=3 uid="uid://bal7d8f2r62gv"]
 
 [ext_resource type="Script" uid="uid://yjx101m4efnq" path="res://tests/ico_sphere/ico_sphere_utls_display_arraymesh.gd" id="1_lj318"]
 [ext_resource type="PackedScene" uid="uid://chxovomx6cl0q" path="res://usual_camera_setup.tscn" id="2_a7h8c"]
-[ext_resource type="Texture2D" uid="uid://cublqr2li3yvo" path="res://icon.svg" id="2_ybowh"]
+[ext_resource type="Script" uid="uid://blsqjirljvhhd" path="res://tests/ico_sphere/ico_sphere_utils_display_multi_mesh.gd" id="4_ybowh"]
+
+[sub_resource type="Gradient" id="Gradient_a7h8c"]
+colors = PackedColorArray(0, 0.9019608, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ybowh"]
+gradient = SubResource("Gradient_a7h8c")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_arxla"]
-albedo_texture = ExtResource("2_ybowh")
+albedo_texture = SubResource("GradientTexture2D_ybowh")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ybowh"]
+height = 0.5
+radial_segments = 6
+rings = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ybowh"]
+albedo_color = Color(0.09803922, 1, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_arxla"]
+material = SubResource("StandardMaterial3D_ybowh")
+height = 0.5
+radial_segments = 5
+rings = 2
 
 [node name="IcoSphereUtilsDisplayArraymeshTestNode3D" type="Node3D"]
 
 [node name="DisplayNode3D" type="Node3D" parent="."]
 script = ExtResource("1_lj318")
-subdiv = 13
+subdiv = 5
 mat = SubResource("StandardMaterial3D_arxla")
 
 [node name="UsualCameraSetup" parent="." instance=ExtResource("2_a7h8c")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.041143287, 0.99915326, 0, -0.99915326, -0.041143287, 0, 0, 0)
+
+[node name="DisplayMultiMeshNode3D" type="Node3D" parent="."]
+visible = false
+script = ExtResource("4_ybowh")
+hexagon_mesh = SubResource("CylinderMesh_ybowh")
+pentagon_mesh = SubResource("CylinderMesh_arxla")
+mesh_scale = 0.3
+radius = 10.0

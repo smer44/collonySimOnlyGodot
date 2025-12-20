@@ -18,6 +18,25 @@ const frames := [
 		[  Vector3( 0, 0, 1),  Vector3( 1, 0, 0),  Vector3( 0, 1, 0) ], # +Z
 		[  Vector3( 0, 0,-1),  Vector3(-1, 0, 0),  Vector3( 0, 1, 0) ]  # -Z
 	]	
+	
+static func new_array_mesh_arrays() -> Array:
+	var vertices := PackedVector3Array()
+	var normals := PackedVector3Array()
+	var indices := PackedInt32Array()
+	var uvs := PackedVector2Array()
+	return new_array_mesh_arrays_from(vertices,normals,indices,uvs)
+	
+static func new_array_mesh_arrays_from(vertices : PackedVector3Array,
+								normals : PackedVector3Array,
+								indices : PackedInt32Array,
+								uvs : PackedVector2Array) -> Array:
+	var arrays := []
+	arrays.resize(Mesh.ARRAY_MAX)
+	arrays[Mesh.ARRAY_VERTEX] = vertices
+	arrays[Mesh.ARRAY_NORMAL] = normals
+	arrays[Mesh.ARRAY_TEX_UV] = uvs
+	arrays[Mesh.ARRAY_INDEX] = indices	
+	return arrays
 
 
 static func new_grid_array_mesh(w: int, h: int, w_step : float, h_step : float) -> ArrayMesh:
