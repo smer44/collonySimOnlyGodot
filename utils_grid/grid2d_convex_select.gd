@@ -3,14 +3,14 @@ class_name GridConvexSelect
 
 static func ray_inside(grid2d: Array[Array],p: Vector2i, dir: Vector2i,  bound_a: Vector2i, bound_b: Vector2i) -> Vector2i:
 	var estimate :=p + dir
-	while (GridCheck.is_inside_boundary(estimate, bound_a , bound_b) and grid2d[estimate.x][estimate.y]):
+	while (GridIndexingCalc.is_inside_boundary(estimate, bound_a , bound_b) and grid2d[estimate.x][estimate.y]):
 		estimate += dir
 	return estimate - dir
 	
 	
 static func ray_outside(grid2d: Array[Array],p: Vector2i, dir: Vector2i,  bound_a: Vector2i, bound_b: Vector2i) -> Vector2i:
 	var estimate :=p - dir
-	while (GridCheck.is_inside_boundary(estimate, bound_a , bound_b) and grid2d[estimate.x][estimate.y]):
+	while (GridIndexingCalc.is_inside_boundary(estimate, bound_a , bound_b) and grid2d[estimate.x][estimate.y]):
 		estimate -= dir
 	return estimate
 

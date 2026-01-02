@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://ce8p8xv2jnubu"]
 
-[ext_resource type="Script" uid="uid://bdrsmbajlvsy" path="res://tests/ico_sphere/cube_sphere_display_multimesh.gd" id="1_pipu8"]
-[ext_resource type="PackedScene" uid="uid://chxovomx6cl0q" path="res://usual_camera_setup.tscn" id="2_1b5r4"]
-[ext_resource type="Script" uid="uid://dqt31h5rtac13" path="res://tests/ico_sphere/cube_sphere_display_arraymesh.gd" id="3_1b5r4"]
+[ext_resource type="Script" uid="uid://bdrsmbajlvsy" path="res://tests/ico_sphere/cube_sphere_display_multimesh.gd" id="1_hn0dl"]
+[ext_resource type="PackedScene" uid="uid://chxovomx6cl0q" path="res://usual_camera_setup.tscn" id="2_3o8x2"]
+[ext_resource type="Script" uid="uid://dqt31h5rtac13" path="res://tests/ico_sphere/cube_sphere_display_arraymesh.gd" id="3_r4cak"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_pipu8"]
 
@@ -18,13 +18,13 @@ metallic_specular = 0.0
 [node name="IcoSphereSceneNode3D" type="Node3D"]
 
 [node name="IcoSphereDisplayMultimeshNode3D" type="Node3D" parent="."]
-script = ExtResource("1_pipu8")
+script = ExtResource("1_hn0dl")
 instance_mesh = SubResource("BoxMesh_pipu8")
 instance_material = SubResource("StandardMaterial3D_1b5r4")
 instance_scale = 0.1
 
-[node name="UsualCameraSetup" parent="." instance=ExtResource("2_1b5r4")]
+[node name="UsualCameraSetup" parent="." instance=ExtResource("2_3o8x2")]
 
-[node name="IcoSphereDisplayArrayMeshNode3D" type="Node3D" parent="."]
-script = ExtResource("3_1b5r4")
+[node name="CubeSphereDisplayArrayMeshNode3D" type="Node3D" parent="."]
+script = ExtResource("3_r4cak")
 material = SubResource("StandardMaterial3D_1kf56")

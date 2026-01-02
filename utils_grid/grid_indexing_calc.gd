@@ -22,6 +22,33 @@ static func top_boundary(grid: Array) -> Vector2i:
 	assert ( h > 0)
 	return Vector2i(w,h)
 	
+	
+static func neighbour_chunk_xy_if_border_cell(index: Vector2i,chunk_size: Vector2i,map_size: Vector2i , grid_dim: Vector2i)-> Array[Vector2i]: 
+	var out: Array[Vector2i] = []
+	if is_on_boundary_or_outside(index,Vector2i.ZERO, map_size-Vector2i.ONE ):
+		return out
+	var input_chunk: Vector2i = index / chunk_size
+	var input_chunk_origin: Vector2i = input_chunk * chunk_size
+	var local_index :=index - input_chunk_origin
+	
+	if local_index.x == 0:
+		if input_chunk.x > 0:
+			var nbr_chunk := Vector2i(input_chunk.x-1, input_chunk.y)
+			out.append(nbr_chunk)
+	elif local_index.x == chunk_size.x - 1:
+		if input_chunk.x < grid_dim.x-1:
+			var nbr_chunk := Vector2i(input_chunk.x+1, input_chunk.y)
+			out.append(nbr_chunk)
+	if local_index.y == 0:
+		if input_chunk.y > 0:
+			var nbr_chunk := Vector2i(input_chunk.x, input_chunk.y-1)
+			out.append(nbr_chunk)
+	elif local_index.y == chunk_size.y - 1:
+		if input_chunk.y < grid_dim.y-1:
+			var nbr_chunk := Vector2i(input_chunk.x, input_chunk.y+1)
+			out.append(nbr_chunk)
+	return out 
+			
 
 
 static func is_inside_boundary(p: Vector2i, a: Vector2i, b: Vector2i) -> bool:
@@ -30,6 +57,9 @@ static func is_inside_boundary(p: Vector2i, a: Vector2i, b: Vector2i) -> bool:
 	var min_y :int= min(a.y, b.y)
 	var max_y :int= max(a.y, b.y)
 	return p.x >= min_x and p.x <= max_x and p.y >= min_y and p.y <= max_y
+	
+static func is_on_boundary_or_outside(p: Vector2i, a: Vector2i, b: Vector2i) -> bool:
+	return p.x <= a.x or p.y <= a.y or p.x >= b.x or p.y >= b.y
 	
 const  nbrs4: Array[Vector2i] = [Vector2i.UP,	Vector2i.DOWN,	 Vector2i.LEFT,	 Vector2i.RIGHT,]
 

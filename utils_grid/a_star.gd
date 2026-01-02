@@ -15,17 +15,16 @@ func walkable(cell:Vector2i):
 	
 	
 func _heuristic_euclid(a: Vector2i, b: Vector2i) -> float:
-	var dx := float(a.x - b.x)
-	var dy := float(a.y - b.y)
-	return sqrt(dx * dx + dy * dy)
+	return a.distance_squared_to(b)
 
 # Manhattan (recommended for strictly 4-dir movement)
 func _heuristic_manhattan(a: Vector2i, b: Vector2i) -> float:
 	return abs(a.x - b.x) + abs(a.y - b.y)
 	
 func _heuristic_euclid_nbr(d: Vector2i) -> float:
-	return sqrt(d.x * d.x + d.y * d.y)
+	return d.length_squared()
 	
+
 func heuristic_nbr(d: Vector2i) -> float:
 	return _heuristic_euclid_nbr(d)
 

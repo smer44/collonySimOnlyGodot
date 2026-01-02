@@ -31,7 +31,7 @@ rings = 2
 
 [node name="DisplayNode3D" type="Node3D" parent="."]
 script = ExtResource("1_lj318")
-subdiv = 5
+subdiv = 4
 mat = SubResource("StandardMaterial3D_arxla")
 
 [node name="UsualCameraSetup" parent="." instance=ExtResource("2_a7h8c")]
